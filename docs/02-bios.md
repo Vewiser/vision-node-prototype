@@ -1,42 +1,31 @@
-# 02 // M720q BIOS Configuration
-
-Firmware labels vary by BIOS revision. Record original values before changing them.
+# 02 // M720q BIOS Configuration for ZimaOS
 
 ## Enter BIOS
 
 1. Shut down the M720q.
-2. Connect keyboard, display, Ethernet, and Ubuntu USB.
-3. Power on and repeatedly press `F1` for Setup.
+2. Connect keyboard, display, Ethernet, and the ZimaOS installer.
+3. Power on and repeatedly press `F1`.
 4. Use `F12` for the temporary boot menu.
 
 ## Recommended settings
 
 | Setting | Target | Purpose |
 | --- | --- | --- |
-| Boot mode | UEFI | Modern Ubuntu boot |
-| USB boot | Enabled | Run the installer |
-| Intel Virtualization Technology | Enabled | Keeps Docker/VM options open |
-| VT-d | Enabled | Future device and virtualization experiments |
-| Secure Boot | Leave enabled initially | Ubuntu supports Secure Boot |
-| Wake on LAN | Enabled | Future remote wake capability |
+| Boot mode | UEFI | Modern x86 boot |
+| USB boot | Enabled | Start installer |
+| Intel Virtualization Technology | Enabled | Required for hardware-assisted VMs |
+| VT-d | Enabled | Keeps future VM/device options open |
+| Wake on LAN | Enabled | Future remote wake |
 | After power loss | Power On or Last State | Automatic recovery |
-| Date/time | Correct | Reliable updates, certificates, and logs |
+| Date/time | Correct | Reliable updates and certificates |
 
-If the installer fails to boot, troubleshoot the USB image and boot entry before changing Secure Boot. Do not enable Intel AMT unless you deliberately configure and secure it.
+Follow the current ZimaOS guide for Secure Boot. If boot fails, verify the image and UEFI entry before changing security settings. Do not enable Intel AMT unless you deliberately secure it.
 
-## Boot Ubuntu
+## Boot installer
 
-1. Save BIOS settings and exit.
-2. Press `F12` during restart.
-3. Select the UEFI entry for the Ubuntu USB.
-4. Confirm the Ubuntu Server installer appears.
+1. Save and exit.
+2. Press `F12`.
+3. Select the UEFI USB entry.
+4. Confirm the ZimaOS installer appears.
 
-## Validation
-
-- [ ] BIOS detects 16 GB RAM.
-- [ ] BIOS detects the 500 GB NVMe.
-- [ ] Wired Ethernet link is active.
-- [ ] USB appears as a UEFI boot option.
-- [ ] No unexplained BIOS password or hardware warning exists.
-
-**Checkpoint:** Stop if the displayed drive does not match the hardware inventory.
+Stop if BIOS does not show 16 GB RAM or the expected 500 GB NVMe.
