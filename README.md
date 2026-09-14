@@ -1,20 +1,17 @@
 # VISION NODE // PROTOTYPE 01
 
-> A compact home-lab node for virtualization, Linux, cloud engineering, automation, networking, and authorized security research.
+> A compact Linux node for learning servers, networking, automation, containers, cloud workflows, and authorized security research.
 
 ![Status](https://img.shields.io/badge/status-build%20in%20progress-E10600)
-![Platform](https://img.shields.io/badge/platform-Proxmox%20VE-black)
+![OS](https://img.shields.io/badge/OS-Ubuntu%20Server-black)
 ![Hardware](https://img.shields.io/badge/hardware-Lenovo%20M720q-555)
 ![License](https://img.shields.io/badge/license-All%20Rights%20Reserved-lightgrey)
 
 ## Mission
 
-Vision Node is a practical mini data center built by V. Dixon / VISION AMPLIFIED. Prototype 01 converts a Lenovo ThinkCentre M720q into a controlled environment for learning, building, breaking, restoring, and documenting systems.
+Vision Node is a practical mini data center built by V. Dixon / VISION AMPLIFIED. Prototype 01 converts a Lenovo ThinkCentre M720q into one clean, understandable Linux server.
 
-This repository is both:
-
-1. An installation runbook for rebuilding the node from scratch.
-2. A public build journal showing the decisions, tests, failures, and lessons behind the prototype.
+The first prototype intentionally uses **Ubuntu Server directly on the hardware**. This keeps the starting system simple: one machine, one operating system, one network connection, and one layer to troubleshoot. Virtualization with Proxmox remains a future expansion after the Linux foundation is stable.
 
 ## Confirmed hardware
 
@@ -24,62 +21,57 @@ This repository is both:
 | CPU | Intel Core i5-8400T, 6 cores |
 | Memory | 16 GB RAM |
 | Primary storage | 500 GB NVMe |
-| Networking | Wired Ethernet for management; Wi-Fi retained for later experiments |
-| Hypervisor | Proxmox VE 9.2 |
-| First guest | Ubuntu Server 26.04.1 LTS |
+| Networking | Wired Ethernet primary; Wi-Fi optional later |
+| Operating system | Ubuntu Server 26.04.1 LTS, x86-64 |
+| Hostname | `vision-node-01` |
 
-Additional switch, Raspberry Pi, display, and rack details will be added after their model numbers are confirmed.
-
-## Initial architecture
+## Prototype 01 architecture
 
 ```mermaid
 flowchart TD
     R["Home router"] --> S["NETGEAR switch"]
-    S --> P["M720q • Proxmox"]
-    S --> PI["Raspberry Pi"]
-    P --> U["VM 100 • Vision Core"]
-    P --> L["Future LXC services"]
-    P --> K["Future isolated security lab"]
+    S --> V["M720q • Ubuntu Server"]
+    S --> PI["Raspberry Pi • future helper node"]
+    V --> D["Docker • Phase 2"]
+    D --> A["Apps and automation"]
+    D --> M["Monitoring"]
 ```
 
-The first launch uses one trusted LAN. VLAN segmentation is a later phase, after the base system is stable and recoverable.
+## What this first node will teach
 
-## Resource plan
-
-| Workload | vCPU | RAM | Disk | Launch phase |
-| --- | ---: | ---: | ---: | --- |
-| Proxmox host reserve | — | 3–4 GB | Host-managed | 1 |
-| Vision Core Ubuntu VM | 4 | 6 GB | 80 GB | 1 |
-| Network-services LXC | 1 | 1 GB | 12 GB | 2 |
-| Security VM | 2–4 | 4–6 GB | 60 GB | 3; run only when needed |
-
-Do not allocate all 16 GB. The host and storage cache need breathing room. Keep at least 150 GB available for ISO images, snapshots, backups, and experiments.
+- Installing and maintaining Linux
+- Users, permissions, packages, services, and logs
+- Wired networking, DHCP reservations, DNS, and SSH
+- Git and GitHub documentation
+- Docker containers after the base system is proven
+- Monitoring and backups
+- Controlled automation and cloud-engineering practice
 
 ## Build sequence
 
 - [ ] [Record hardware and recovery information](docs/00-hardware-inventory.md)
 - [ ] [Complete the no-data-loss preflight](docs/01-preflight.md)
 - [ ] [Configure the M720q BIOS](docs/02-bios.md)
-- [ ] [Install Proxmox VE](docs/03-proxmox-install.md)
-- [ ] [Complete Proxmox first boot](docs/04-proxmox-first-boot.md)
-- [ ] [Create the Vision Core Ubuntu VM](docs/05-ubuntu-vision-core.md)
+- [ ] [Install Ubuntu Server](docs/03-ubuntu-install.md)
+- [ ] [Complete first boot and SSH](docs/04-ubuntu-first-boot.md)
+- [ ] [Install the starter toolset](docs/05-starter-stack.md)
 - [ ] [Validate and establish backups](docs/06-validation-backup.md)
 - [ ] [Document the build safely](docs/07-github-build-log.md)
 
 ## Operating rules
 
-1. Ethernet is the management path.
-2. Never expose the Proxmox web interface directly to the public internet.
-3. Never commit secrets or personally identifying network information.
-4. Snapshot before risky experiments; backups remain separate from the node.
-5. Security testing is restricted to systems you own or are explicitly authorized to test.
-6. Change one major layer at a time and validate before continuing.
+1. Ethernet is the primary connection.
+2. Never expose SSH, Docker, Cockpit, or another dashboard directly to the public internet.
+3. Never commit credentials or identifying network information.
+4. Install one layer, test it, and document it before adding another.
+5. Maintain a separate backup of anything that cannot be rebuilt.
+6. Security testing is limited to systems you own or have explicit permission to test.
 
 ## Current milestone
 
-**Prototype assembled → OS installation preparation**
+**Prototype assembled → Ubuntu installation preparation**
 
-See [CHANGELOG.md](CHANGELOG.md) for documented milestones and [SECURITY.md](SECURITY.md) before sharing screenshots or configurations.
+The future virtualization route is preserved in [Proxmox Upgrade Path](docs/future/proxmox-upgrade-path.md).
 
 ## Author
 
@@ -88,7 +80,7 @@ VISION AMPLIFIED
 
 ## References
 
-- [Proxmox VE installation guide](https://pve.proxmox.com/pve-docs/chapter-pve-installation.html)
-- [Proxmox VE administration guide](https://pve.proxmox.com/pve-docs/pve-admin-guide.html)
 - [Ubuntu Server download](https://ubuntu.com/download/server)
+- [Ubuntu Server documentation](https://documentation.ubuntu.com/server/)
+- [Docker Engine documentation](https://docs.docker.com/engine/)
 - [GitHub documentation](https://docs.github.com/)
