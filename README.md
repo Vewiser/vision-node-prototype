@@ -58,6 +58,7 @@ flowchart TD
 - [ ] [M720q BIOS](docs/02-bios.md)
 - [ ] [Install ZimaOS](docs/03-zimaos-install.md)
 - [ ] [Complete first boot](docs/04-zimaos-first-boot.md)
+- [ ] [Configure wireless mode](docs/04a-wireless-mode.md)
 - [ ] [Install first apps](docs/05-zimaos-starter-stack.md)
 - [ ] [Create the first ZVM guest](docs/06-zvm-first-vm.md)
 - [ ] [Launch a disposable cloud instance](docs/modules/cloud-lab/README.md)
@@ -87,6 +88,7 @@ With 16 GB RAM, keep at least 6–8 GB available to ZimaOS and its apps. Start l
 **Prototype assembled → ZimaOS installation preparation**
 
 - [ZimaOS Installation](docs/03-zimaos-install.md)
+- [Wireless Mode](docs/04a-wireless-mode.md)
 - [ZVM First VM](docs/06-zvm-first-vm.md)
 - [Cloud Lab](docs/modules/cloud-lab/README.md)
 - [Cyber Lab](docs/modules/hacking-lab/README.md)
