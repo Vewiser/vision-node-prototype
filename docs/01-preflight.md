@@ -1,18 +1,14 @@
 # 01 // Preflight and Recovery
 
-> Stop: the Proxmox installer will erase the selected 500 GB NVMe.
-
-Do not continue until every required item below is checked.
+> Stop: installing Ubuntu on the selected 500 GB NVMe will erase Windows and its files.
 
 ## Preserve Windows and personal data
 
 - [ ] Copy every required personal file to separate storage.
-- [ ] Confirm the backup opens from another computer.
-- [ ] Confirm Windows activation is linked to the intended Microsoft account, if applicable.
-- [ ] Record the Windows edition: Windows 11 Pro.
+- [ ] Open several backed-up files from another computer.
+- [ ] Confirm Windows activation is linked to your Microsoft account, if applicable.
 - [ ] Create Windows recovery media if you may restore Windows later.
-- [ ] Save required application licenses without placing keys in GitHub.
-- [ ] Photograph the current BIOS settings for private reference.
+- [ ] Save required license information privately.
 - [ ] Confirm the M720q contains only the drive intended for erasure.
 
 A file existing in only one place is not backed up.
@@ -20,63 +16,61 @@ A file existing in only one place is not backed up.
 ## Required equipment
 
 - [ ] M720q and power adapter
-- [ ] USB keyboard
-- [ ] Temporary monitor/display
+- [ ] Keyboard and temporary monitor
 - [ ] 8 GB or larger USB drive
 - [ ] Wired Ethernet cable
-- [ ] Second computer for downloads and administration
+- [ ] Second computer for downloading Ubuntu
 - [ ] Independent backup storage
 - [ ] Router administration access
 
-## Network worksheet — keep real values private
+## Simple network plan
 
-| Setting | Documentation example |
+Use DHCP during installation. After Ubuntu is working, create a DHCP reservation for the node in the router.
+
+| Setting | Public documentation example |
 | --- | --- |
-| Router/gateway | `192.0.2.1` |
-| Proxmox address | `192.0.2.10/24` |
-| DNS server | `192.0.2.1` |
-| Hostname | `vision-node-01.example.internal` |
+| Hostname | `vision-node-01` |
+| Example server address | `192.0.2.10` |
+| Connection | Wired Ethernet |
+| Remote administration | SSH from trusted LAN only |
 
-The `192.0.2.0/24` network is documentation-only. Do not blindly enter these example values. Determine your real gateway and DHCP range, then select a reserved address outside the automatic DHCP pool or create a router reservation.
+`192.0.2.0/24` is reserved for documentation. Never copy it as your real configuration.
 
-## Download and verify
+## Download and verify Ubuntu
 
-1. Download the current x86-64 Proxmox VE ISO from the official Proxmox download page.
-2. Download a trusted imaging tool such as Balena Etcher or Rufus from its official source.
-3. Verify the ISO SHA-256 checksum against the value published by Proxmox.
-4. Write the ISO to the USB drive.
-5. Safely eject the USB drive.
-
-### Checksum commands
+1. Download the current Ubuntu Server 26.04.1 LTS x86-64 ISO from Ubuntu.
+2. Download Balena Etcher or Rufus from its official source.
+3. Obtain Ubuntu's published SHA-256 checksum.
+4. Calculate the downloaded ISO checksum.
+5. Continue only if both values match.
+6. Write the ISO to the USB drive and safely eject it.
 
 macOS:
 
 ```bash
-shasum -a 256 ~/Downloads/proxmox-ve_*.iso
+shasum -a 256 ~/Downloads/ubuntu-*-live-server-amd64.iso
 ```
 
 Windows PowerShell:
 
 ```powershell
-Get-FileHash "$HOME\Downloads\proxmox-ve_*.iso" -Algorithm SHA256
+Get-FileHash "$HOME\Downloads\ubuntu-*-live-server-amd64.iso" -Algorithm SHA256
 ```
 
 Linux:
 
 ```bash
-sha256sum ~/Downloads/proxmox-ve_*.iso
+sha256sum ~/Downloads/ubuntu-*-live-server-amd64.iso
 ```
-
-Proceed only when the computed and published checksums match exactly.
 
 ## Go/no-go gate
 
 - [ ] Backup verified
-- [ ] Correct target drive identified
-- [ ] ISO checksum verified
-- [ ] Real network settings recorded privately
+- [ ] Correct NVMe identified
+- [ ] Ubuntu ISO checksum verified
 - [ ] Ethernet connected
-- [ ] Maintenance window available
-- [ ] Rollback media available
+- [ ] Router access available
+- [ ] Windows recovery decision completed
+- [ ] Enough uninterrupted time available
 
-**Checkpoint:** Commit a redacted preflight update before erasing the drive.
+**Checkpoint:** Do not erase the disk until every item above is complete.
