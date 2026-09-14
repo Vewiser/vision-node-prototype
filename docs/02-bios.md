@@ -1,43 +1,42 @@
 # 02 // M720q BIOS Configuration
 
-Firmware labels can vary by BIOS revision. Record the original value before changing a setting.
+Firmware labels vary by BIOS revision. Record original values before changing them.
 
 ## Enter BIOS
 
 1. Shut down the M720q.
-2. Connect keyboard, display, Ethernet, and Proxmox USB.
-3. Power on and repeatedly press `F1` to enter Setup.
-4. If needed, use `F12` for the temporary boot menu.
+2. Connect keyboard, display, Ethernet, and Ubuntu USB.
+3. Power on and repeatedly press `F1` for Setup.
+4. Use `F12` for the temporary boot menu.
 
-## Required settings
+## Recommended settings
 
-| Setting | Target | Reason |
+| Setting | Target | Purpose |
 | --- | --- | --- |
-| Boot mode | UEFI | Modern boot path |
-| Intel Virtualization Technology | Enabled | Required for KVM virtual machines |
-| VT-d | Enabled | Enables IOMMU/device assignment experiments |
-| Secure Boot | Disabled for initial install | Avoids avoidable first-install friction |
-| USB boot | Enabled | Boots installer |
-| Wake on LAN | Enabled | Remote power-on capability |
-| After power loss | Power On or Last State | Recovers after an outage |
-| Date/time | Correct UTC/local basis | Prevents certificate and log errors |
+| Boot mode | UEFI | Modern Ubuntu boot |
+| USB boot | Enabled | Run the installer |
+| Intel Virtualization Technology | Enabled | Keeps Docker/VM options open |
+| VT-d | Enabled | Future device and virtualization experiments |
+| Secure Boot | Leave enabled initially | Ubuntu supports Secure Boot |
+| Wake on LAN | Enabled | Future remote wake capability |
+| After power loss | Power On or Last State | Automatic recovery |
+| Date/time | Correct | Reliable updates, certificates, and logs |
 
-Do not enable Intel AMT remote management unless you understand and securely configure it. Unconfigured management interfaces expand the attack surface.
+If the installer fails to boot, troubleshoot the USB image and boot entry before changing Secure Boot. Do not enable Intel AMT unless you deliberately configure and secure it.
 
-## Boot installer
+## Boot Ubuntu
 
-1. Save settings and exit.
+1. Save BIOS settings and exit.
 2. Press `F12` during restart.
-3. Select the UEFI entry for the Proxmox USB.
-4. Confirm that the graphical Proxmox installer appears.
+3. Select the UEFI entry for the Ubuntu USB.
+4. Confirm the Ubuntu Server installer appears.
 
 ## Validation
 
 - [ ] BIOS detects 16 GB RAM.
 - [ ] BIOS detects the 500 GB NVMe.
-- [ ] Virtualization is enabled.
-- [ ] Ethernet link light is active.
+- [ ] Wired Ethernet link is active.
 - [ ] USB appears as a UEFI boot option.
 - [ ] No unexplained BIOS password or hardware warning exists.
 
-**Checkpoint:** Do not start installation if the drive capacity or identity differs from the inventory.
+**Checkpoint:** Stop if the displayed drive does not match the hardware inventory.
