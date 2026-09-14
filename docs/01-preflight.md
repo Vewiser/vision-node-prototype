@@ -1,76 +1,49 @@
 # 01 // Preflight and Recovery
 
-> Stop: installing Ubuntu on the selected 500 GB NVMe will erase Windows and its files.
+> Stop: installing ZimaOS on the selected 500 GB NVMe will erase Windows and its files.
 
-## Preserve Windows and personal data
+## Preserve Windows
 
-- [ ] Copy every required personal file to separate storage.
+- [ ] Copy every required file to separate storage.
 - [ ] Open several backed-up files from another computer.
-- [ ] Confirm Windows activation is linked to your Microsoft account, if applicable.
-- [ ] Create Windows recovery media if you may restore Windows later.
-- [ ] Save required license information privately.
+- [ ] Confirm Windows activation/recovery information privately.
+- [ ] Create Windows recovery media if you may restore it later.
 - [ ] Confirm the M720q contains only the drive intended for erasure.
-
-A file existing in only one place is not backed up.
 
 ## Required equipment
 
 - [ ] M720q and power adapter
-- [ ] Keyboard and temporary monitor
-- [ ] 8 GB or larger USB drive
+- [ ] Keyboard and temporary display
+- [ ] USB flash drive, 4 GB minimum; 8 GB or larger preferred
 - [ ] Wired Ethernet cable
-- [ ] Second computer for downloading Ubuntu
-- [ ] Independent backup storage
+- [ ] Second computer for downloading and writing ZimaOS
+- [ ] Independent backup destination
 - [ ] Router administration access
 
-## Simple network plan
+## Compatibility
 
-Use DHCP during installation. After Ubuntu is working, create a DHCP reservation for the node in the router.
+ZimaOS currently documents generic x86-64 installation with at least 25 GB of storage. The M720q's i5-8400T and 500 GB NVMe exceed that baseline. Keep Intel virtualization enabled for ZVM.
 
-| Setting | Public documentation example |
-| --- | --- |
-| Hostname | `vision-node-01` |
-| Example server address | `192.0.2.10` |
-| Connection | Wired Ethernet |
-| Remote administration | SSH from trusted LAN only |
+## Network plan
 
-`192.0.2.0/24` is reserved for documentation. Never copy it as your real configuration.
+Use wired Ethernet and DHCP for the initial launch. After the node works, create a DHCP reservation in the router. Never publish the actual address, MAC address, router configuration, or remote-access credentials.
 
-## Download and verify Ubuntu
+## Download safely
 
-1. Download the current Ubuntu Server 26.04.1 LTS x86-64 ISO from Ubuntu.
-2. Download Balena Etcher or Rufus from its official source.
-3. Obtain Ubuntu's published SHA-256 checksum.
-4. Calculate the downloaded ISO checksum.
-5. Continue only if both values match.
-6. Write the ISO to the USB drive and safely eject it.
-
-macOS:
-
-```bash
-shasum -a 256 ~/Downloads/ubuntu-*-live-server-amd64.iso
-```
-
-Windows PowerShell:
-
-```powershell
-Get-FileHash "$HOME\Downloads\ubuntu-*-live-server-amd64.iso" -Algorithm SHA256
-```
-
-Linux:
-
-```bash
-sha256sum ~/Downloads/ubuntu-*-live-server-amd64.iso
-```
+1. Download the current stable generic x86-64 ZimaOS image from the official ZimaOS site.
+2. Read the current official installation guide because image format and flashing steps may change.
+3. Verify a published checksum when ZimaOS supplies one.
+4. Write the image using the official method or a trusted imaging utility.
+5. Safely eject the USB.
 
 ## Go/no-go gate
 
-- [ ] Backup verified
-- [ ] Correct NVMe identified
-- [ ] Ubuntu ISO checksum verified
-- [ ] Ethernet connected
+- [ ] Windows backup verified
+- [ ] Recovery decision complete
+- [ ] Correct 500 GB NVMe identified
+- [ ] Official ZimaOS image obtained
+- [ ] Wired Ethernet connected
 - [ ] Router access available
-- [ ] Windows recovery decision completed
-- [ ] Enough uninterrupted time available
+- [ ] Uninterrupted installation window available
 
-**Checkpoint:** Do not erase the disk until every item above is complete.
+Do not erase the disk until every item is complete.
