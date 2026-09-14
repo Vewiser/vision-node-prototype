@@ -1,64 +1,53 @@
 # 06 // Validation and Backup
 
-The node is ready only when it can be checked, restarted, and recovered.
+## ZimaOS baseline
 
-## System validation
-
-Run:
-
-```bash
-hostnamectl
-lscpu
-free -h
-lsblk
-df -h
-systemctl --failed
-sudo apt update
-```
-
-Success means:
-
-- [ ] Hostname is `vision-node-01`.
-- [ ] Six CPU cores and approximately 16 GB RAM are visible.
-- [ ] The NVMe and filesystem appear healthy.
-- [ ] No unexplained failed services exist.
-- [ ] Package repositories are reachable.
+- [ ] Dashboard opens from a trusted LAN device.
+- [ ] Six CPU cores and approximately 16 GB RAM appear.
+- [ ] The 500 GB NVMe appears healthy.
 - [ ] Wired networking and DNS work.
-- [ ] SSH key login works from the trusted workstation.
-- [ ] The server returns after a controlled reboot.
-- [ ] No router port forwarding exposes SSH or dashboards.
+- [ ] System updates complete.
+- [ ] The node returns after a controlled reboot.
+- [ ] No router port forwards expose the dashboard.
+- [ ] The administrator password is unique and privately stored.
 
-## Backup strategy
+## App and VM baseline
 
-Prototype 01 has one internal NVMe. A second copy must live on another physical device.
+- [ ] One low-risk app installs, starts, stops, and removes cleanly.
+- [ ] Persistent app data location is understood.
+- [ ] ZVM detects Intel virtualization.
+- [ ] One test VM boots with 2 vCPU and 4 GB RAM.
+- [ ] Host remains responsive while the VM runs.
+- [ ] VM shutdown and deletion are understood.
+- [ ] A cyber target has not been created before isolation testing.
 
-| Asset | Method | Minimum frequency |
-| --- | --- | --- |
-| Important project data | `rsync`, restic, or borg to separate storage | Weekly |
-| System configuration notes | Sanitized GitHub documentation | After material changes |
-| Private recovery details | Encrypted private record | After material changes |
-| Container definitions later | Sanitized Compose files | After changes |
-| Databases later | Application-aware export plus backup | Scheduled per importance |
+## Backup policy
 
-GitHub is a documentation and configuration-history layer, not a full server backup.
+Prototype 01 has one NVMe, so a second copy must exist on another physical device or system.
 
-## First recovery exercise
+| Asset | Backup |
+| --- | --- |
+| Important files | Separate physical destination |
+| App configuration | Export or documented recreation steps |
+| VM images | Separate storage when worth preserving |
+| GitHub docs/IaC | GitHub plus local clone |
+| Private recovery data | Encrypted private record |
+| Cloud resources | Re-creatable code, not irreplaceable server state |
 
-1. Back up one non-sensitive test directory to separate storage.
-2. Delete only a disposable test copy.
-3. Restore it to a new directory.
-4. Compare the restored contents.
-5. Record the successful test in the build log.
+## Restore exercise
 
-Do not practice deletion with unique or valuable data.
+1. Back up a disposable test folder.
+2. Restore it to a new location.
+3. Compare contents.
+4. Recreate one low-risk app from documented settings.
+5. Record the result without exposing private details.
 
 ## Completion gate
 
-- [ ] Ubuntu baseline passes.
-- [ ] SSH access is proven.
-- [ ] Firewall state is verified.
-- [ ] Independent backup succeeds.
-- [ ] Test restore succeeds.
-- [ ] Build log is updated.
+- [ ] ZimaOS baseline passes.
+- [ ] Independent backup and restore pass.
+- [ ] First ZVM lifecycle is documented.
+- [ ] Cloud budget alert and teardown are tested.
+- [ ] Build log is current.
 
-Only then proceed to Docker applications, remote VPN access, network services, or security tooling.
+Only then unlock vulnerable cyber-lab targets.
