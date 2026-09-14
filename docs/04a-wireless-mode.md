@@ -1,37 +1,56 @@
-# 04A // Wireless Vision Node Mode
+# 04A // Direct Wi-Fi Vision Node Mode
 
-Yes, Vision Node can run over Wi-Fi after initial setup, provided ZimaOS recognizes the M720q wireless adapter.
+Vision Node Prototype 01 uses the Lenovo M720q's internal Wi-Fi as its permanent primary network connection. No mesh node or wireless bridge is part of this build.
 
-## Recommended order
+Temporary Ethernet is permitted only for initial installation, driver recovery, or emergency maintenance.
 
-1. Install and update ZimaOS using temporary wired Ethernet.
-2. Identify and test the internal Wi-Fi adapter.
-3. Configure Wi-Fi with `nmtui`.
-4. Confirm automatic reconnection after reboot.
-5. Create a router reservation for the wireless adapter.
-6. Disconnect Ethernet only after the wireless recovery test passes.
+## Before erasing Windows
 
-## Option A — Wireless bridge or mesh node
+Identify the exact adapter while Windows is still installed.
 
-**Recommended for an always-on node.**
+### PowerShell
 
-Place a compatible mesh satellite, travel router in bridge/client mode, or wireless bridge near Vision Node. Connect its LAN port to the M720q with a short Ethernet cable.
+```powershell
+Get-NetAdapter | Format-Table Name, InterfaceDescription, Status, LinkSpeed
+```
 
-Benefits:
+### Device Manager
 
-- ZimaOS continues to see a normal Ethernet connection.
-- Better compatibility with dashboards, containers, and VMs.
-- Easier recovery and fewer Linux Wi-Fi driver problems.
-- More predictable operation than bridging VM traffic through a Wi-Fi client.
-- The main router can remain in its inconvenient location.
+Open **Device Manager → Network adapters** and record the full wireless-adapter name.
 
-The link between rooms is still wireless; only the final few inches use Ethernet.
+Document only the chipset/model. Do not publish the MAC address, SSID, password, or actual network address.
 
-## Option B — Internal M720q Wi-Fi
+## Compatibility gate
 
-### Confirm the adapter
+ZimaOS officially documents command-line Wi-Fi configuration using `nmtui` on ZimaOS 1.4.2 and later for supported hardware such as the Intel AX210.
 
-From ZimaOS Terminal or a local console:
+Before relying on wireless mode:
+
+- [ ] Exact M720q Wi-Fi chipset is known.
+- [ ] Installed ZimaOS version is 1.4.2 or newer.
+- [ ] ZimaOS detects the adapter.
+- [ ] The correct kernel driver loads.
+- [ ] The node reconnects automatically after an unplugged reboot.
+
+If the adapter is unsupported, stop and identify a ZimaOS-compatible internal replacement adapter. Do not redesign the build around a bridge.
+
+## Initial installation
+
+1. Connect temporary Ethernet.
+2. Install the current stable ZimaOS image.
+3. Complete initial account setup.
+4. Install stable ZimaOS updates.
+5. Confirm local-console access.
+6. Identify the wireless adapter.
+7. Configure Wi-Fi.
+8. Test wireless reboot.
+9. Remove Ethernet.
+
+Do not place the node in its final headless location until the Wi-Fi-only reboot passes.
+
+## Identify Wi-Fi inside ZimaOS
+
+From Terminal or the local console:
 
 ```bash
 lspci -nnk | grep -A3 -i network
@@ -39,11 +58,9 @@ ip link
 nmcli device status
 ```
 
-Record the chipset model, not the MAC address, in the public build log.
+The adapter should appear as a wireless device rather than missing, unavailable, or unmanaged.
 
-ZimaOS officially documents command-line Wi-Fi configuration with `nmtui` for supported Intel hardware on ZimaOS 1.4.2 and later.
-
-### Connect
+## Connect with NetworkManager
 
 ```bash
 sudo nmtui
@@ -55,7 +72,7 @@ Then:
 2. Select the intended Wi-Fi network.
 3. Enter the password privately.
 4. Save and exit.
-5. Verify connectivity.
+5. Confirm connectivity.
 
 ```bash
 nmcli device status
@@ -65,58 +82,69 @@ ping -c 4 1.1.1.1
 ping -c 4 example.com
 ```
 
-Never copy SSIDs, passwords, MAC addresses, or actual private addresses into GitHub.
+## Wi-Fi-only reboot test
 
-## Reboot test
+1. Reboot once with Ethernet connected.
+2. Confirm Wi-Fi reconnects.
+3. Open the ZimaOS dashboard wirelessly.
+4. Shut the M720q down.
+5. Disconnect Ethernet.
+6. Boot using Wi-Fi only.
+7. Confirm dashboard, apps, DNS, GitHub, and cloud access.
+8. Repeat the reboot once more.
+9. Create a DHCP reservation for the wireless adapter in the router.
 
-1. Keep temporary Ethernet connected during initial configuration.
-2. Reboot ZimaOS.
-3. Confirm Wi-Fi reconnects automatically.
-4. Open the dashboard from another trusted device.
-5. Shut down.
-6. Disconnect Ethernet.
-7. Boot again.
-8. Confirm the dashboard, apps, DNS, and cloud access work through Wi-Fi.
-9. Confirm local keyboard/display recovery remains available.
+Wireless mode passes only after two successful Wi-Fi-only boots.
 
-Do not declare wireless mode complete until the unplugged reboot passes.
+## Local VM networking
 
-## VM rule
+Use ZVM's default NAT mode for the first Ubuntu guest.
 
-Use NAT for the first ZVM guest. Wi-Fi client interfaces often do not behave like Ethernet bridges, so avoid direct/bridged VM networking until ZimaOS explicitly supports and the lab proves it.
+Avoid direct or bridged VM networking over the Wi-Fi interface. A Wi-Fi client does not behave like a normal Ethernet bridge, and support can vary by driver and ZVM release.
 
-The vulnerable cyber-lab target remains locked until an isolated virtual network is verified. Wi-Fi connectivity does not replace lab isolation.
+The hacking lab remains locked until ZVM provides and passes a separate isolated-network test. Host Wi-Fi access does not grant vulnerable targets permission to reach the home LAN.
 
-## Limitations
+## Reliability rules
 
-- Lower consistency and higher latency than Ethernet
-- Reduced file-transfer performance under interference
-- Wi-Fi driver compatibility depends on the exact adapter
-- Wake-on-LAN usually does not work over ordinary Wi-Fi
-- A changed SSID/password can strand a headless server
-- VM bridge behavior may be limited
-- Heavy NAS backups may take significantly longer
+- Use the 5 GHz band when signal quality is stable.
+- Place the M720q where its antennas are not blocked by metal rack components.
+- Avoid enclosing the Wi-Fi antennas behind solid metal panels.
+- Keep the Wi-Fi profile configured for automatic reconnection.
+- Do not change the SSID or password without local-console access.
+- Schedule large backups outside active work periods.
+- Monitor packet loss and dashboard availability with Uptime Kuma.
+- Do not expose the dashboard or VM ports through the router.
 
-## Recovery kit
+## Expected tradeoffs
 
-Keep one of these available:
+- Slower and less consistent transfers than Ethernet
+- Higher latency under interference
+- No dependable Wake-on-WLAN assumption
+- Possible ZVM bridge limitations
+- Recovery may require a keyboard, display, or temporary Ethernet
+- Heavy NAS transfers may compete with VM and cloud traffic
 
-- Temporary long Ethernet cable
-- USB-to-Ethernet adapter supported by ZimaOS
+## Recovery plan
+
+Keep available:
+
 - Keyboard and display
-- Wireless bridge/mesh node
+- Temporary Ethernet cable
+- ZimaOS installer/recovery USB
+- Private record of the Wi-Fi configuration
+- Independent backup
 
 ## Acceptance checklist
 
-- [ ] Adapter chipset is identified.
-- [ ] ZimaOS recognizes the wireless interface.
-- [ ] Wi-Fi auto-connects after reboot.
-- [ ] Dashboard loads with Ethernet unplugged.
-- [ ] Router reservation uses the Wi-Fi adapter privately.
-- [ ] Apps remain reachable.
-- [ ] One ZVM guest works through NAT.
-- [ ] No public dashboard or VM ports are exposed.
-- [ ] Wired/local recovery remains possible.
+- [ ] Adapter model recorded.
+- [ ] Driver detected and loaded.
+- [ ] Wi-Fi connects through `nmtui`.
+- [ ] Two Wi-Fi-only boots succeed.
+- [ ] Dashboard remains reachable.
+- [ ] Router reservation works.
+- [ ] First ZVM guest works through NAT.
+- [ ] No public ports are exposed.
+- [ ] Local recovery is available.
 
 ## Official references
 
