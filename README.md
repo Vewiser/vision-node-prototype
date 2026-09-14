@@ -11,6 +11,15 @@
 
 Vision Node Prototype 01 uses ZimaOS to make the first server approachable without giving up real experimentation. The M720q becomes the always-on local control node; ZVM provides local virtual machines; a disposable Ubuntu cloud instance provides an off-site engineering sandbox.
 
+## Choose an edition
+
+| Edition | Best use | Interface | Local experiments |
+| --- | --- | --- | --- |
+| **ZimaOS Server Edition** | Always-on personal cloud, apps, storage | Browser dashboard | ZVM |
+| **[Omarchy Operator Edition](docs/variants/omarchy/README.md)** | Visual Linux lab, development, AI, terminal, cloud control | Hyprland desktop | Docker + VMs |
+
+Both editions use internal Wi-Fi, GitHub documentation, one substantial local VM at a time, and a disposable Ubuntu cloud instance. Only one host operating system can occupy the M720q's single 500 GB drive at a time.
+
 ## Confirmed hardware
 
 | Component | Specification |
@@ -88,6 +97,7 @@ With 16 GB RAM, keep at least 6–8 GB available to ZimaOS and its apps. Start l
 **Prototype assembled → ZimaOS installation preparation**
 
 - [ZimaOS Installation](docs/03-zimaos-install.md)
+- [Omarchy Operator Edition](docs/variants/omarchy/README.md)
 - [Wireless Mode](docs/04a-wireless-mode.md)
 - [ZVM First VM](docs/06-zvm-first-vm.md)
 - [Cloud Lab](docs/modules/cloud-lab/README.md)
