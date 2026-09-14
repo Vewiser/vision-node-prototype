@@ -1,27 +1,16 @@
 # 06 // Validation and Backup
 
-The node is not operationally complete until it can be checked and recovered.
+The node is ready only when it can be checked, restarted, and recovered.
 
-## Host validation
+## System validation
 
-- [ ] Proxmox loads at the expected private address.
-- [ ] No router port forwards expose Proxmox or SSH.
-- [ ] CPU reports six cores.
-- [ ] Memory reports approximately 16 GB.
-- [ ] NVMe and LVM-thin storage are healthy.
-- [ ] Package updates complete without errors.
-- [ ] Correct time and DNS resolution are confirmed.
-- [ ] Named administrator and 2FA are tested.
-- [ ] Local root recovery remains available.
-- [ ] Node returns after a controlled reboot.
-
-## Vision Core validation
-
-Run inside Ubuntu:
+Run:
 
 ```bash
 hostnamectl
+lscpu
 free -h
+lsblk
 df -h
 systemctl --failed
 sudo apt update
@@ -29,53 +18,47 @@ sudo apt update
 
 Success means:
 
-- [ ] Hostname is `vision-core-01`.
-- [ ] Expected CPU, RAM, and disk are visible.
-- [ ] No failed systemd units require investigation.
+- [ ] Hostname is `vision-node-01`.
+- [ ] Six CPU cores and approximately 16 GB RAM are visible.
+- [ ] The NVMe and filesystem appear healthy.
+- [ ] No unexplained failed services exist.
 - [ ] Package repositories are reachable.
+- [ ] Wired networking and DNS work.
 - [ ] SSH key login works from the trusted workstation.
-- [ ] QEMU guest agent reports to Proxmox.
-- [ ] VM stops and starts cleanly.
+- [ ] The server returns after a controlled reboot.
+- [ ] No router port forwarding exposes SSH or dashboards.
 
 ## Backup strategy
 
-Prototype 01 has one internal NVMe. Therefore:
+Prototype 01 has one internal NVMe. A second copy must live on another physical device.
 
-- Snapshots protect against some configuration mistakes.
-- Snapshots do not protect against NVMe failure, theft, fire, or node loss.
-- A real backup must be stored on another physical device or system.
-- Critical repository documentation also lives on GitHub, but GitHub is not a VM backup.
+| Asset | Method | Minimum frequency |
+| --- | --- | --- |
+| Important project data | `rsync`, restic, or borg to separate storage | Weekly |
+| System configuration notes | Sanitized GitHub documentation | After material changes |
+| Private recovery details | Encrypted private record | After material changes |
+| Container definitions later | Sanitized Compose files | After changes |
+| Databases later | Application-aware export plus backup | Scheduled per importance |
 
-Minimum initial policy:
+GitHub is a documentation and configuration-history layer, not a full server backup.
 
-| Asset | Method | Frequency | Destination |
-| --- | --- | --- | --- |
-| Vision Core VM | Proxmox backup | Weekly and before major changes | Separate storage |
-| Proxmox configuration notes | Sanitized documentation | After material changes | GitHub |
-| Private recovery data | Encrypted record | After material changes | Password manager/private backup |
-| VM baseline | Snapshot | Before experiments | Same node; temporary |
+## First recovery exercise
 
-## Restore test
+1. Back up one non-sensitive test directory to separate storage.
+2. Delete only a disposable test copy.
+3. Restore it to a new directory.
+4. Compare the restored contents.
+5. Record the successful test in the build log.
 
-A backup is unproven until restored.
-
-1. Create an independent backup of Vision Core.
-2. Record duration and resulting file size privately.
-3. Restore it using a temporary VM ID.
-4. Boot the restored VM on an isolated/no-network setting first.
-5. Confirm filesystem and services.
-6. Delete the temporary restored guest only after validation.
-7. Record the successful test without publishing private paths or addresses.
+Do not practice deletion with unique or valuable data.
 
 ## Completion gate
 
-Phase 1 is complete only when:
-
-- [ ] Host baseline passes.
-- [ ] Guest baseline passes.
-- [ ] Clean snapshot exists.
-- [ ] Independent backup exists.
-- [ ] Restore test succeeds.
+- [ ] Ubuntu baseline passes.
+- [ ] SSH access is proven.
+- [ ] Firewall state is verified.
+- [ ] Independent backup succeeds.
+- [ ] Test restore succeeds.
 - [ ] Build log is updated.
 
-Only then proceed to service containers, remote access, automation, VLANs, or an isolated security lab.
+Only then proceed to Docker applications, remote VPN access, network services, or security tooling.
