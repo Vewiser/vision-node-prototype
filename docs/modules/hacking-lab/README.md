@@ -1,40 +1,72 @@
 # VISION NODE // Isolated Cyber Lab
 
-> A legal, contained environment for learning how attacks work so systems can be designed and defended better.
+> A legal, contained environment for understanding attacks and improving defenses.
+
+## Status
+
+**Locked until ZVM network isolation is proven.**
+
+ZimaOS is the Prototype 01 host. The lab may use ZVM only if the installed stable release can create and verify a network that does not route to the home LAN, router, internet, or ZimaOS management interface.
+
+If that boundary cannot be proven, do not run vulnerable targets locally. Continue with safe CTF platforms, a disposable Kali workstation, and defensive cloud experiments instead.
 
 ## Scope
 
-This module supports training against intentionally vulnerable local machines, your own disposable applications, CTF challenges, and systems for which you have explicit written authorization. It does not authorize testing third-party systems.
+Allowed:
 
-## Architecture
+- Intentionally vulnerable machines you own
+- Disposable applications designed for training
+- CTF challenges
+- Systems covered by explicit written authorization
 
-```mermaid
-flowchart TD
-    H["Ubuntu host"] --> NAT["Temporary update network"]
-    H --> ISO["Isolated vision-lab network"]
-    NAT --> K["Kali VM • update mode"]
-    ISO --> K
-    ISO --> T["Target VM"]
-```
+Not allowed:
 
-**Critical rule:** Kali uses either update mode or lab mode—not both simultaneously. The target uses lab mode only.
+- Third-party systems
+- Neighboring or public Wi-Fi
+- Production, client, dental, family, or studio systems
+- Publicly exposed vulnerable cloud instances
 
 ## Resource budget
 
-| System | vCPU | RAM | Disk | Network |
+| System | vCPU | RAM | Disk | Rule |
 | --- | ---: | ---: | ---: | --- |
-| Ubuntu host reserve | — | 6–8 GB | Host-managed | Physical LAN |
-| Kali workstation | 2 | 4 GB | 60 GB | Update or isolated lab |
-| Vulnerable target | 1–2 | 2 GB | 20–40 GB | Isolated lab only |
+| ZimaOS reserve | — | 6–8 GB | Host-managed | Always preserved |
+| Kali workstation | 2 | 4 GB | 60 GB | One substantial VM at a time |
+| Vulnerable target | 1–2 | 2 GB | 20–40 GB | Only after isolation proof |
 
-## Module sequence
+## Unlock sequence
 
-1. [Charter and safety gate](00-charter.md)
-2. [Install KVM/libvirt](01-kvm-foundation.md)
-3. [Create the isolated network](02-isolated-network.md)
-4. [Create the Kali workstation](03-kali-workstation.md)
-5. [Add targets and train](04-targets-and-learning-path.md)
+1. Install and validate ZimaOS.
+2. Complete an independent backup and restore.
+3. Create the safe Ubuntu ZVM guest.
+4. Learn ZVM start, stop, console, network, and deletion.
+5. Prove an isolated ZVM network with harmless guests.
+6. Record the isolation test.
+7. Create Kali from an official, checksum-verified image.
+8. Add one intentionally vulnerable target.
+9. Train using the defensive journal and cleanup checklist.
 
-## Phase gate
+## Two-mode rule
 
-Do not begin until Ubuntu passes validation, SSH and firewall work, an independent backup exists, virtualization is enabled, at least 150 GB is free, and local-console recovery is available.
+### Update mode
+
+- Vulnerable target is off.
+- Kali receives temporary outbound access only.
+- Kali is updated from official repositories.
+- Outbound access is detached after shutdown.
+
+### Lab mode
+
+- Kali and target use only the proven isolated network.
+- No physical LAN or internet route exists.
+- No real data or credentials are present.
+- Both guests are shut down when training ends.
+
+## Supporting documents
+
+The earlier KVM/libvirt documents remain as technical reference, but ZVM's current interface and official documentation control this Prototype 01 implementation.
+
+- [Charter](00-charter.md)
+- [Isolation concepts](02-isolated-network.md)
+- [Kali workstation](03-kali-workstation.md)
+- [Targets and defensive learning](04-targets-and-learning-path.md)
