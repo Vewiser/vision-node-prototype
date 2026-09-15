@@ -11,15 +11,6 @@
 
 Vision Node Prototype 01 uses ZimaOS to make the first server approachable without giving up real experimentation. The M720q becomes the always-on local control node; ZVM provides local virtual machines; a disposable Ubuntu cloud instance provides an off-site engineering sandbox.
 
-## Choose an edition
-
-| Edition | Best use | Interface | Local experiments |
-| --- | --- | --- | --- |
-| **ZimaOS Server Edition** | Always-on personal cloud, apps, storage | Browser dashboard | ZVM |
-| **[Omarchy Operator Edition](docs/variants/omarchy/README.md)** | Visual Linux lab, development, AI, terminal, cloud control | Hyprland desktop | Docker + VMs |
-
-Both editions use internal Wi-Fi, GitHub documentation, one substantial local VM at a time, and a disposable Ubuntu cloud instance. Only one host operating system can occupy the M720q's single 500 GB drive at a time.
-
 ## Confirmed hardware
 
 | Component | Specification |
@@ -28,7 +19,7 @@ Both editions use internal Wi-Fi, GitHub documentation, one substantial local VM
 | CPU | Intel Core i5-8400T, 6 cores |
 | Memory | 16 GB RAM |
 | Primary storage | 500 GB NVMe |
-| Primary connection | Wired Ethernet |
+| Primary connection | Internal 5 GHz Wi-Fi |
 | Host OS | Current stable ZimaOS for generic x86-64 |
 | Local virtualization | ZVM |
 | Cloud guest | Ubuntu Server LTS |
@@ -47,6 +38,7 @@ flowchart TD
 ### Local node
 
 - ZimaOS dashboard
+- Internal Wi-Fi as the permanent connection
 - File storage and backups
 - App Store/Docker services
 - Uptime Kuma and selected automation
@@ -67,7 +59,7 @@ flowchart TD
 - [ ] [M720q BIOS](docs/02-bios.md)
 - [ ] [Install ZimaOS](docs/03-zimaos-install.md)
 - [ ] [Complete first boot](docs/04-zimaos-first-boot.md)
-- [ ] [Configure wireless mode](docs/04a-wireless-mode.md)
+- [ ] [Configure direct Wi-Fi mode](docs/04a-wireless-mode.md)
 - [ ] [Install first apps](docs/05-zimaos-starter-stack.md)
 - [ ] [Create the first ZVM guest](docs/06-zvm-first-vm.md)
 - [ ] [Launch a disposable cloud instance](docs/modules/cloud-lab/README.md)
@@ -91,17 +83,21 @@ With 16 GB RAM, keep at least 6–8 GB available to ZimaOS and its apps. Start l
 - Never commit secrets, real network details, or state files.
 - Back up before experiments; prove restore before trusting a backup.
 - Test only systems you own or are explicitly authorized to assess.
+- Adopt experimental host operating systems only after their reliability and recovery paths are proven.
 
 ## Current milestone
 
 **Prototype assembled → ZimaOS installation preparation**
 
 - [ZimaOS Installation](docs/03-zimaos-install.md)
-- [Omarchy Operator Edition](docs/variants/omarchy/README.md)
-- [Wireless Mode](docs/04a-wireless-mode.md)
+- [Direct Wi-Fi Mode](docs/04a-wireless-mode.md)
 - [ZVM First VM](docs/06-zvm-first-vm.md)
 - [Cloud Lab](docs/modules/cloud-lab/README.md)
 - [Cyber Lab](docs/modules/hacking-lab/README.md)
+
+## Deferred ideas
+
+Omarchy was evaluated as a potential operator-console OS and intentionally deferred until it has a longer stability record for this use case. The evaluation remains recoverable through Git history.
 
 ## Author
 
