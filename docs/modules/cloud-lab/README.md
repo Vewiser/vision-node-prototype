@@ -1,6 +1,6 @@
 # VISION NODE // Disposable Cloud Instance
 
-The cloud instance extends the local ZimaOS node. It is a temporary Ubuntu engineering sandbox, not permanent production infrastructure.
+The cloud instance extends the local Ubuntu Server node. It is a temporary engineering sandbox, not permanent production infrastructure.
 
 ## Purpose
 
@@ -19,7 +19,7 @@ Do not use it as a publicly exposed vulnerable target.
 
 | Setting | Beginner choice |
 | --- | --- |
-| OS | Current Ubuntu Server LTS |
+| OS | Ubuntu Server 26.04.1 LTS when the provider offers it; otherwise its current Ubuntu LTS image |
 | Size | Small general-purpose instance |
 | Authentication | SSH key; no password login where supported |
 | Administrator | Named non-root user |
@@ -32,12 +32,12 @@ Do not use it as a publicly exposed vulnerable target.
 ## Cost controls
 
 1. Enable MFA on the cloud account.
-2. Create a separate lab project/account boundary.
+2. Create a separate lab project or account boundary.
 3. Configure budget alerts before launching.
 4. Understand that a budget alert may not be a hard spending cap.
 5. Tag the instance with owner, purpose, and deletion date.
-6. Stop is not the same as delete; storage and addresses may still cost money.
-7. Destroy the instance and verify related disks, snapshots, and IPs are gone.
+6. Remember that stop is not the same as delete.
+7. Destroy the instance and verify related disks, snapshots, and addresses are gone.
 
 ## First experiment
 
@@ -49,7 +49,7 @@ Do not use it as a publicly exposed vulnerable target.
 6. Serve a simple static test page.
 7. Record validation without publishing its live address.
 8. Delete the instance and associated resources.
-9. Verify billing/resource inventory is empty.
+9. Verify billing and resource inventory are empty.
 10. Repeat later using Terraform/OpenTofu.
 
 ## GitHub rule
@@ -57,7 +57,7 @@ Do not use it as a publicly exposed vulnerable target.
 Commit:
 
 - Sanitized Terraform/OpenTofu
-- README and diagrams
+- README files and diagrams
 - Validation commands
 - Cost-control checklist
 - Teardown proof without account identifiers
