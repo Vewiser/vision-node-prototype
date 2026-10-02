@@ -11,8 +11,8 @@ For each build session:
 3. **Action** — record concise steps and official references.
 4. **Test** — show how success or failure was determined.
 5. **Lesson** — explain what changed in your understanding.
-6. **Next** — name one next milestone.
-7. **Commit** — save a small, meaningful documentation update.
+6. **Next** — name one controlled milestone.
+7. **Commit** — save a small, meaningful update.
 
 ## Entry template
 
@@ -43,56 +43,44 @@ The next controlled milestone.
 
 ## Commit style
 
-Use concise imperative messages:
-
 ```text
 docs: record M720q hardware baseline
-docs: complete Proxmox preflight
-build: install Proxmox VE 9.2
-build: create Vision Core VM
-security: document management access controls
-backup: validate first VM restore
+build: install Ubuntu Server 26.04.1 LTS
+security: enable SSH keys and UFW
+network: validate Wi-Fi-only reboot
+build: install Docker and Compose
+cloud: document first disposable instance
+backup: validate first restore
+security: prove isolated lab network
 ```
 
-## Image workflow
+## Proof without oversharing
 
-Store public images under `images/build-log/YYYY-MM-DD/`.
-
-Before committing:
+Before committing screenshots or logs:
 
 - Crop serial numbers and QR codes.
-- Blur MAC addresses and private IPs.
-- Hide browser bookmarks, usernames, email addresses, and notifications.
-- Remove passwords, tokens, recovery codes, and terminal history.
-- Check reflections in displays and glossy surfaces.
-- Remove location metadata from exported images.
-- Use descriptive filenames such as `m720q-mounted-front.jpg`.
+- Blur MAC addresses and real IPs.
+- Hide usernames, email addresses, bookmarks, and notifications.
+- Remove passwords, tokens, recovery codes, SSH private keys, and shell history.
+- Check reflections and location metadata.
 
-Never rely only on `.gitignore` after a secret has already been committed. Git preserves history. If a credential is exposed, revoke or rotate it immediately before cleaning history.
+If a credential is exposed, revoke or rotate it immediately. Deleting it in a later commit does not remove it from Git history.
 
-## Suggested public narrative
+## Public narrative
 
-**Beginning:** I built the physical prototype to understand infrastructure by operating it.
+**Beginning:** I turned a small office PC into my first Ubuntu server.
 
-**Middle:** Each layer—firmware, virtualization, Linux, networking, recovery, automation—is installed and proven separately.
+**Middle:** I learned each layer by building it—Linux, networking, containers, cloud, backups, and isolation.
 
-**End:** Vision Node becomes a repeatable compact lab and a living demonstration of systems architecture.
-
-## Branches
-
-For a solo build, keep the workflow simple:
-
-- `main`: tested documentation and stable milestones
-- Short-lived branches: substantial rewrites or automation experiments
-- Pull requests: optional self-review checkpoint for risky configuration changes
+**End:** Vision Node became a repeatable mini data center and proof that I can operate the systems behind modern apps and cloud services.
 
 ## Release milestones
 
 - `v0.1` — Documentation foundation
-- `v0.2` — Proxmox installed and validated
-- `v0.3` — Vision Core baseline
-- `v0.4` — Independent backup and restore test
-- `v0.5` — Network services
-- `v0.6` — Remote access and monitoring
-- `v0.7` — Segmented security lab
+- `v0.2` — Ubuntu installed and secured
+- `v0.3` — Wi-Fi/headless operation validated
+- `v0.4` — Docker service and restore test
+- `v0.5` — Disposable cloud instance
+- `v0.6` — KVM test VM
+- `v0.7` — Isolated ethical-security lab
 - `v1.0` — Repeatable Vision Node Prototype 01
