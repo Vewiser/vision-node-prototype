@@ -1,6 +1,6 @@
 # VISION NODE // Disposable Cloud Instance
 
-The cloud instance extends the local Ubuntu Server node. It is a temporary engineering sandbox, not permanent production infrastructure.
+The cloud instance extends the local Ubuntu Desktop node. It is a temporary Ubuntu Server sandbox for learning how a visual local Linux system connects to headless cloud infrastructure.
 
 ## Purpose
 
@@ -11,7 +11,7 @@ Use it for:
 - Web server and API experiments
 - GitHub Actions deployment practice
 - Logs, monitoring, and backup exercises
-- Comparing local and cloud networking
+- Comparing local desktop, local services, and cloud networking
 
 Do not use it as a publicly exposed vulnerable target.
 
@@ -19,7 +19,7 @@ Do not use it as a publicly exposed vulnerable target.
 
 | Setting | Beginner choice |
 | --- | --- |
-| OS | Ubuntu Server 26.04.1 LTS when the provider offers it; otherwise its current Ubuntu LTS image |
+| OS | Ubuntu Server 26.04.1 LTS when offered; otherwise the provider's current Ubuntu LTS image |
 | Size | Small general-purpose instance |
 | Authentication | SSH key; no password login where supported |
 | Administrator | Named non-root user |
@@ -41,8 +41,8 @@ Do not use it as a publicly exposed vulnerable target.
 
 ## First experiment
 
-1. Create one Ubuntu instance manually.
-2. Connect using an SSH key.
+1. Create one Ubuntu Server instance manually.
+2. Connect from Ubuntu Desktop using an SSH key.
 3. Update packages.
 4. Install Git.
 5. Clone this public repository.
