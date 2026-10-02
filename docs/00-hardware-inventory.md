@@ -15,17 +15,19 @@ Complete this page before installation. Public entries must not include serial n
 | RAM | 16 GB |
 | Primary drive | 500 GB NVMe |
 | Existing OS | Windows 11 Pro |
-| Planned host OS | Proxmox VE 9.2 |
+| Starting host OS | Ubuntu Desktop 26.04.1 LTS |
 | Boot mode | UEFI |
-| Primary management | Wired Ethernet |
+| Primary connection | Internal 5 GHz Wi-Fi |
+| Recovery connection | Temporary Ethernet |
+| Later OS paths | Ubuntu Server, then Proxmox when justified |
 
 ## To confirm
 
 - [ ] Exact RAM configuration and available slot
 - [ ] NVMe manufacturer and health
-- [ ] Ethernet controller detected
-- [ ] NETGEAR switch model and whether it supports VLANs
-- [ ] Raspberry Pi model, RAM, storage, and power supply
+- [ ] Internal Wi-Fi chipset and Linux driver
+- [ ] Bluetooth detection
+- [ ] Ethernet controller detection for recovery
 - [ ] Rack display connection and resolution
 - [ ] BIOS version
 - [ ] Spare USB drive capacity
@@ -42,7 +44,7 @@ Recommended public photos:
 - Full rack front
 - Rear cable management
 - M720q mounted in rack
-- Switch and patch-panel details
-- Screen showing a redacted dashboard
+- Small display showing a redacted Ubuntu Desktop
+- First sanitized system-information screen
 
 Before uploading, inspect reflections, labels, screens, QR codes, shipping labels, and image metadata.
