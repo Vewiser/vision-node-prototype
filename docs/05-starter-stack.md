@@ -1,6 +1,6 @@
-# 05 // Ubuntu Starter Stack
+# 05 // Ubuntu Desktop Starter Stack
 
-Install in stages. The point is to understand each layer, not fill the node with apps.
+Install in stages. Use the visual desktop when it helps, but practice the command line so the later Ubuntu Server path feels familiar.
 
 ## Phase 1 — Linux foundation
 
@@ -33,9 +33,9 @@ git --version
 
 ## Phase 2 — Docker
 
-Begin only after the first-boot, reboot, firewall, and backup checks pass.
+Begin only after the first-boot, reboot, firewall, 48-hour stability, and backup checks pass.
 
-Install Docker Engine from Docker's current official Ubuntu repository:
+Install Docker Engine from Docker's official Ubuntu repository:
 
 - Docker Engine
 - Docker CLI
@@ -53,26 +53,26 @@ sudo docker run --rm hello-world
 
 Do not expose the Docker socket. Treat membership in the `docker` group as root-equivalent access.
 
-## Phase 3 — First useful services
+## Phase 3 — First useful service
 
-Add one service at a time:
+Start with one low-risk service:
 
 1. **Uptime Kuma** — confirms whether internal services are reachable.
-2. **Homepage** — optional private dashboard for the node.
-3. **n8n** — local automation experiments after backups are proven.
+2. **Homepage** — optional private command dashboard.
+3. **n8n** — automation experiments after backups are proven.
 4. **Tailscale** — private remote access without router port forwarding.
 
-Do not make the first server your only DNS path. Network-critical services come later, with a fallback.
+Do not make the first node your only DNS path.
 
 ## Phase 4 — Local virtualization
 
-After the Ubuntu host is stable, install KVM/libvirt using current Ubuntu guidance. Confirm CPU virtualization first:
+After Ubuntu Desktop is stable, install KVM/libvirt and a visual manager such as Virtual Machine Manager.
 
 ```bash
 lscpu | grep Virtualization
 ```
 
-The first guest should be a low-risk Ubuntu test VM on libvirt's default NAT network. Start with 2 vCPU and 4 GB RAM. The vulnerable security lab remains locked until isolation is proven.
+The first guest should be a low-risk Ubuntu test VM using libvirt's default NAT network. Start with 2 vCPU and 4 GB RAM. The vulnerable security lab remains locked until isolation is proven.
 
 ## Phase 5 — Cloud engineering
 
@@ -80,7 +80,7 @@ Use a separate sandbox cloud account or project with MFA and a small budget aler
 
 - Launching and destroying one Ubuntu instance
 - SSH key authentication
-- Security-group/firewall rules
+- Firewall/security-group rules
 - Terraform/OpenTofu state awareness
 - Simple CI/CD
 - Monitoring and logs
@@ -88,24 +88,20 @@ Use a separate sandbox cloud account or project with MFA and a small budget aler
 
 Cloud resources must be disposable and reproducible.
 
-## Not included yet
+## Upgrade paths
 
-- Proxmox
-- Kubernetes
-- Public production hosting
-- Router port forwarding
-- Complex VLANs
-- Important databases without tested backups
-- Scripts copied without review
+- [Ubuntu Server](future/ubuntu-server-upgrade-path.md) — lean headless operation after the Desktop build is reproducible
+- [Proxmox](future/proxmox-upgrade-path.md) — multiple simultaneous VMs after the need and hardware are proven
 
 ## Learning target
 
 At the end of Prototype 01, you should be able to explain:
 
-- How Ubuntu boots and runs services
+- How Ubuntu runs applications and services
+- How the desktop relates to the Linux system underneath
 - How users, permissions, SSH, and firewall rules work
 - How Docker differs from the host
 - How a VM differs from a container
-- How a local server compares with a cloud instance
+- How a local node compares with a cloud instance
 - Where data lives and how it is restored
 - Why security-lab isolation matters
