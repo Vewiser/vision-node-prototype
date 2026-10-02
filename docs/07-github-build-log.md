@@ -45,42 +45,31 @@ The next controlled milestone.
 
 ```text
 docs: record M720q hardware baseline
-build: install Ubuntu Server 26.04.1 LTS
+build: install Ubuntu Desktop 26.04.1 LTS
 security: enable SSH keys and UFW
 network: validate Wi-Fi-only reboot
 build: install Docker and Compose
+proof: record first service restore
 cloud: document first disposable instance
-backup: validate first restore
 security: prove isolated lab network
 ```
 
-## Proof without oversharing
-
-Before committing screenshots or logs:
-
-- Crop serial numbers and QR codes.
-- Blur MAC addresses and real IPs.
-- Hide usernames, email addresses, bookmarks, and notifications.
-- Remove passwords, tokens, recovery codes, SSH private keys, and shell history.
-- Check reflections and location metadata.
-
-If a credential is exposed, revoke or rotate it immediately. Deleting it in a later commit does not remove it from Git history.
-
 ## Public narrative
 
-**Beginning:** I turned a small office PC into my first Ubuntu server.
+**Beginning:** I turned a small office PC into a visual Ubuntu workstation and mini data center.
 
-**Middle:** I learned each layer by building it—Linux, networking, containers, cloud, backups, and isolation.
+**Middle:** I learned Linux, networking, containers, cloud, backups, and isolation one layer at a time.
 
-**End:** Vision Node became a repeatable mini data center and proof that I can operate the systems behind modern apps and cloud services.
+**End:** I could operate the node from the terminal, rebuild its services, and decide whether to graduate it to Ubuntu Server.
 
 ## Release milestones
 
 - `v0.1` — Documentation foundation
-- `v0.2` — Ubuntu installed and secured
-- `v0.3` — Wi-Fi/headless operation validated
-- `v0.4` — Docker service and restore test
+- `v0.2` — Ubuntu Desktop installed and secured
+- `v0.3` — Wi-Fi and 48-hour baseline validated
+- `v0.4` — Docker service, backup, and Proof 001
 - `v0.5` — Disposable cloud instance
 - `v0.6` — KVM test VM
 - `v0.7` — Isolated ethical-security lab
+- `v0.8` — Ubuntu Server migration decision
 - `v1.0` — Repeatable Vision Node Prototype 01
