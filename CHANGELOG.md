@@ -4,29 +4,41 @@
 
 - Back up Windows and verify recovery
 - Confirm the exact internal Wi-Fi chipset
-- Install Ubuntu Server 26.04.1 LTS
+- Install Ubuntu Desktop 26.04.1 LTS
 - Validate Wi-Fi, SSH, firewall, updates, and recovery
+- Complete the 48-hour stability test
 - Install Docker Engine and Compose
+- Document Proof 001
 - Launch and destroy the first disposable cloud instance
 - Create one lightweight KVM/libvirt guest
 - Unlock the security lab only after isolation is proven
+
+## [0.7.0] - 2026-10-02
+
+### Changed
+
+- Made Ubuntu Desktop 26.04.1 LTS the Prototype 01 starting operating system
+- Preserved Ubuntu Server as a documented later upgrade path
+- Added a visual try-before-install and hardware validation stage
+- Simplified permanent Wi-Fi setup using Ubuntu Desktop and NetworkManager
+- Added the 48-hour stability gate and Proof 001
+- Preserved Docker, cloud engineering, KVM/libvirt, and the isolated ethical-security lab
+- Kept Proxmox as the later multi-VM upgrade path
 
 ## [0.6.0] - 2026-10-02
 
 ### Changed
 
-- Replaced ZimaOS with Ubuntu Server 26.04.1 LTS as the single Prototype 01 host-OS direction
-- Reframed the M720q as a direct Linux, Docker, cloud-engineering, and ethical-security learning node
-- Replaced ZVM with KVM/libvirt for later local virtualization
-- Rewrote Wi-Fi, validation, backup, and milestone documentation for Ubuntu
-- Removed active ZimaOS installation, first-boot, starter-stack, and ZVM guest pages
-- Preserved Proxmox as a future upgrade path after the Ubuntu foundation is proven
+- Replaced ZimaOS with Ubuntu Server 26.04.1 LTS
+- Reframed the M720q as a Linux, Docker, cloud-engineering, and ethical-security learning node
+- Replaced ZVM with KVM/libvirt
+- Removed active ZimaOS and ZVM pages
 
 ## [0.5.0] - 2026-09-15
 
 ### Changed
 
-- Removed the Omarchy variant from the current documentation
+- Removed the Omarchy variant
 - Restored ZimaOS as the host-OS direction at that stage
 - Confirmed internal Wi-Fi as the permanent connection
 
