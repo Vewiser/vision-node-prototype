@@ -6,9 +6,9 @@
 
 **Locked until KVM/libvirt network isolation is proven.**
 
-Ubuntu Server is the Prototype 01 host. The lab uses KVM/libvirt only after the node is stable, backed up, and able to run a network that does not route to the home LAN, router, internet, or host-management services.
+Ubuntu Desktop is the Prototype 01 host. The lab uses KVM/libvirt only after the node passes its 48-hour stability test, backup/restore test, and Proof 001. The visual Virtual Machine Manager can help during the first build, but the isolation rules remain strict.
 
-If that boundary cannot be proven, do not run vulnerable targets locally. Continue with reputable CTF platforms and defensive exercises instead.
+If the lab network cannot be proven separate from the home LAN, router, internet, and host-management services, do not run vulnerable targets locally. Continue with reputable CTF platforms and defensive exercises instead.
 
 ## Scope
 
@@ -31,23 +31,24 @@ Not allowed:
 
 | System | vCPU | RAM | Disk | Rule |
 | --- | ---: | ---: | ---: | --- |
-| Ubuntu host reserve | — | At least 6 GB | Host-managed | Always preserved |
+| Ubuntu Desktop reserve | — | At least 6 GB | Host-managed | Always preserved |
 | Kali workstation | 2 | 4 GB | 60 GB | One substantial VM at a time |
 | Vulnerable target | 1–2 | 2 GB | 20–40 GB | Only after isolation proof |
 
 ## Unlock sequence
 
-1. Install and secure Ubuntu Server.
-2. Complete an independent backup and restore.
-3. Install and validate KVM/libvirt.
-4. Create a safe Ubuntu test guest.
-5. Learn VM start, stop, console, snapshot, and deletion.
-6. Build an isolated libvirt network with harmless guests.
-7. Prove the network cannot reach trusted home devices.
-8. Record the isolation test.
-9. Create Kali from an official checksum-verified image.
-10. Add one intentionally vulnerable target.
-11. Train, document remediation, restore, and clean up.
+1. Install and secure Ubuntu Desktop.
+2. Complete the 48-hour stability test.
+3. Complete an independent backup and restore.
+4. Document Proof 001.
+5. Install and validate KVM/libvirt and Virtual Machine Manager.
+6. Create a safe Ubuntu test guest.
+7. Learn VM start, stop, console, snapshot, and deletion.
+8. Build an isolated libvirt network with harmless guests.
+9. Prove the network cannot reach trusted home devices.
+10. Create Kali from an official checksum-verified image.
+11. Add one intentionally vulnerable target.
+12. Train, document remediation, restore, and clean up.
 
 ## Two-mode rule
 
