@@ -1,10 +1,12 @@
 # 04A // Direct Wi-Fi Vision Node Mode
 
-Vision Node Prototype 01 uses the Lenovo M720q's internal Wi-Fi as its permanent primary connection. Temporary Ethernet is permitted for installation, driver recovery, or emergency maintenance.
+Vision Node Prototype 01 uses the Lenovo M720q's internal Wi-Fi as its permanent primary connection. Ubuntu Desktop includes NetworkManager and a visual Wi-Fi settings panel, making this simpler than the later headless Server configuration.
+
+Temporary Ethernet is permitted only for installation, driver recovery, or emergency maintenance.
 
 ## Before erasing Windows
 
-Record the exact wireless-adapter model.
+Record the exact wireless-adapter model:
 
 ```powershell
 Get-NetAdapter | Format-Table Name, InterfaceDescription, Status, LinkSpeed
@@ -12,68 +14,19 @@ Get-NetAdapter | Format-Table Name, InterfaceDescription, Status, LinkSpeed
 
 Do not publish the MAC address, SSID, password, or real network address.
 
-## Compatibility gate
+## Connect visually
 
-Before relying on Wi-Fi:
+1. Open the system menu in the top-right corner.
+2. Select **Wi-Fi**.
+3. Choose the intended 5 GHz network.
+4. Enter the password privately.
+5. Confirm **Connect automatically** is enabled.
+6. Open **Settings → Wi-Fi** and confirm the connection remains active.
 
-- [ ] Exact Wi-Fi chipset is known.
-- [ ] Ubuntu detects the adapter.
-- [ ] The correct kernel driver loads.
-- [ ] NetworkManager controls the interface.
-- [ ] The node reconnects automatically after an unplugged reboot.
-- [ ] Local console or temporary Ethernet recovery remains available.
-
-## Install NetworkManager
-
-Ubuntu Server may use Netplan with systemd-networkd by default. For this beginner build, NetworkManager provides a clearer Wi-Fi workflow.
-
-```bash
-sudo apt update
-sudo apt install -y network-manager
-sudo systemctl enable --now NetworkManager
-```
-
-Before changing Netplan, save a private copy of the current configuration:
-
-```bash
-sudo cp -a /etc/netplan /etc/netplan.backup
-```
-
-Netplan filenames and renderer settings vary. Review the active files before editing:
-
-```bash
-sudo ls -la /etc/netplan
-sudo sed -n '1,200p' /etc/netplan/*.yaml
-```
-
-Set `renderer: NetworkManager` in the active Netplan configuration, then validate safely:
-
-```bash
-sudo netplan try
-sudo netplan apply
-```
-
-Use the local console during this change so a network mistake does not lock you out.
-
-## Identify and connect
+## Validate through Terminal
 
 ```bash
 lspci -nnk | grep -A3 -i network
-ip link
-nmcli device status
-sudo nmtui
-```
-
-In `nmtui`:
-
-1. Select **Activate a connection**.
-2. Choose the intended Wi-Fi network.
-3. Enter the password privately.
-4. Save and exit.
-
-Validate:
-
-```bash
 nmcli device status
 ip -br address
 ip route
@@ -83,22 +36,21 @@ ping -c 4 example.com
 
 ## Wi-Fi-only reboot test
 
-1. Reboot once with Ethernet connected.
-2. Confirm Wi-Fi reconnects.
-3. Shut down the M720q.
-4. Disconnect Ethernet.
-5. Boot using Wi-Fi only.
-6. Confirm SSH, DNS, GitHub, and internet access.
-7. Repeat the Wi-Fi-only reboot.
-8. Create a DHCP reservation for the wireless adapter in the router.
+1. Confirm Wi-Fi works with Ethernet disconnected.
+2. Reboot the M720q.
+3. Confirm the desktop reconnects automatically.
+4. Confirm SSH, DNS, GitHub, and internet access.
+5. Shut down fully and start again.
+6. Repeat the checks.
+7. Create a DHCP reservation for the wireless adapter in the router.
 
 Wireless mode passes only after two successful Wi-Fi-only boots.
 
 ## Virtual-machine networking
 
-Begin with libvirt's default NAT network. Do not bridge vulnerable guests directly to the Wi-Fi interface or home LAN.
+Begin with libvirt's default NAT network. Do not bridge vulnerable guests directly to Wi-Fi or the home LAN.
 
-The ethical-hacking lab remains locked until:
+The ethical-security lab remains locked until:
 
 - The VM network is isolated from the home LAN.
 - Vulnerable targets cannot reach trusted devices.
@@ -109,17 +61,15 @@ The ethical-hacking lab remains locked until:
 
 - Prefer 5 GHz when signal quality is stable.
 - Keep antennas clear of metal rack panels.
-- Keep the Wi-Fi profile configured for automatic reconnection.
-- Do not change the SSID or password without local-console access.
+- Keep automatic reconnection enabled.
+- Keep a keyboard, display, and temporary Ethernet cable available.
 - Schedule large backups outside active work periods.
-- Monitor packet loss and service availability.
 - Do not expose SSH or service ports through the router.
 
 ## Acceptance checklist
 
 - [ ] Adapter model recorded.
-- [ ] Driver detected and loaded.
-- [ ] Wi-Fi connects through NetworkManager.
+- [ ] Wi-Fi connects through Ubuntu Desktop.
 - [ ] Two Wi-Fi-only boots succeed.
 - [ ] SSH remains reachable.
 - [ ] Router reservation works.
@@ -129,6 +79,5 @@ The ethical-hacking lab remains locked until:
 
 ## Official references
 
-- [Ubuntu networking documentation](https://documentation.ubuntu.com/server/explanation/networking/)
-- [Netplan documentation](https://netplan.readthedocs.io/)
+- [Ubuntu Desktop networking](https://documentation.ubuntu.com/desktop/en/latest/how-to/connect-to-the-internet/)
 - [NetworkManager documentation](https://networkmanager.dev/docs/)
