@@ -1,53 +1,68 @@
 # 06 // Validation and Backup
 
-## ZimaOS baseline
+## Ubuntu baseline
 
-- [ ] Dashboard opens from a trusted LAN device.
+- [ ] Ubuntu Server 26.04.1 LTS boots from NVMe.
 - [ ] Six CPU cores and approximately 16 GB RAM appear.
-- [ ] The 500 GB NVMe appears healthy.
-- [ ] Wired networking and DNS work.
-- [ ] System updates complete.
+- [ ] The 500 GB NVMe reports healthy.
+- [ ] System updates complete without errors.
+- [ ] SSH key login works from a trusted device.
+- [ ] UFW allows only intended access.
 - [ ] The node returns after a controlled reboot.
-- [ ] No router port forwards expose the dashboard.
+- [ ] Two Wi-Fi-only reboots succeed.
+- [ ] No router port forwards expose the node.
 - [ ] The administrator password is unique and privately stored.
+- [ ] `systemctl --failed` reports no unexplained failures.
 
-## App and VM baseline
+## Container baseline
 
-- [ ] One low-risk app installs, starts, stops, and removes cleanly.
-- [ ] Persistent app data location is understood.
-- [ ] ZVM detects Intel virtualization.
-- [ ] One test VM boots with 2 vCPU and 4 GB RAM.
+- [ ] Docker Engine and Compose versions are recorded.
+- [ ] The hello-world container runs and removes cleanly.
+- [ ] One low-risk service starts, stops, and recreates cleanly.
+- [ ] Persistent data location is understood.
+- [ ] The Docker socket is not exposed.
+- [ ] The host remains responsive under normal container load.
+
+## VM and isolation baseline
+
+- [ ] KVM acceleration is available.
+- [ ] One Ubuntu test VM boots with 2 vCPU and 4 GB RAM.
+- [ ] The guest uses libvirt's default NAT network.
 - [ ] Host remains responsive while the VM runs.
-- [ ] VM shutdown and deletion are understood.
-- [ ] A cyber target has not been created before isolation testing.
+- [ ] VM shutdown, snapshot, and deletion are understood.
+- [ ] No vulnerable target exists before isolation testing.
+- [ ] The lab cannot reach trusted home devices.
 
 ## Backup policy
 
-Prototype 01 has one NVMe, so a second copy must exist on another physical device or system.
+Prototype 01 has one NVMe, so a second copy must exist on another physical device or trusted system.
 
 | Asset | Backup |
 | --- | --- |
 | Important files | Separate physical destination |
-| App configuration | Export or documented recreation steps |
-| VM images | Separate storage when worth preserving |
+| Docker configuration | Compose files plus exported configuration |
+| Persistent app data | Separate encrypted backup |
+| VM definitions/images | Separate storage when worth preserving |
 | GitHub docs/IaC | GitHub plus local clone |
 | Private recovery data | Encrypted private record |
-| Cloud resources | Re-creatable code, not irreplaceable server state |
+| Cloud resources | Re-creatable code, not irreplaceable state |
 
 ## Restore exercise
 
 1. Back up a disposable test folder.
 2. Restore it to a new location.
 3. Compare contents.
-4. Recreate one low-risk app from documented settings.
-5. Record the result without exposing private details.
+4. Recreate one low-risk Docker service.
+5. Reboot and verify the service returns.
+6. Record the result without exposing private details.
 
 ## Completion gate
 
-- [ ] ZimaOS baseline passes.
+- [ ] Ubuntu baseline passes.
 - [ ] Independent backup and restore pass.
-- [ ] First ZVM lifecycle is documented.
+- [ ] Docker lifecycle is documented.
+- [ ] First VM lifecycle is documented.
 - [ ] Cloud budget alert and teardown are tested.
 - [ ] Build log is current.
 
-Only then unlock vulnerable cyber-lab targets.
+Only then unlock intentionally vulnerable security-lab targets.
