@@ -1,34 +1,34 @@
 # 06 // Validation and Backup
 
-## Ubuntu baseline
+## Ubuntu Desktop baseline
 
-- [ ] Ubuntu Server 26.04.1 LTS boots from NVMe.
+- [ ] Ubuntu Desktop 26.04.1 LTS boots from NVMe.
+- [ ] The desktop is responsive at the intended display resolution.
 - [ ] Six CPU cores and approximately 16 GB RAM appear.
 - [ ] The 500 GB NVMe reports healthy.
 - [ ] System updates complete without errors.
 - [ ] SSH key login works from a trusted device.
 - [ ] UFW allows only intended access.
-- [ ] The node returns after a controlled reboot.
 - [ ] Two Wi-Fi-only reboots succeed.
+- [ ] The node runs continuously for 48 hours.
 - [ ] No router port forwards expose the node.
 - [ ] The administrator password is unique and privately stored.
 - [ ] `systemctl --failed` reports no unexplained failures.
 
-## Container baseline
+## First-service proof
 
-- [ ] Docker Engine and Compose versions are recorded.
-- [ ] The hello-world container runs and removes cleanly.
-- [ ] One low-risk service starts, stops, and recreates cleanly.
+- [ ] One low-risk Docker service is installed.
+- [ ] It starts, stops, and recreates cleanly.
+- [ ] It returns after a controlled reboot.
 - [ ] Persistent data location is understood.
 - [ ] The Docker socket is not exposed.
-- [ ] The host remains responsive under normal container load.
+- [ ] The host remains responsive.
 
 ## VM and isolation baseline
 
 - [ ] KVM acceleration is available.
 - [ ] One Ubuntu test VM boots with 2 vCPU and 4 GB RAM.
 - [ ] The guest uses libvirt's default NAT network.
-- [ ] Host remains responsive while the VM runs.
 - [ ] VM shutdown, snapshot, and deletion are understood.
 - [ ] No vulnerable target exists before isolation testing.
 - [ ] The lab cannot reach trusted home devices.
@@ -47,22 +47,25 @@ Prototype 01 has one NVMe, so a second copy must exist on another physical devic
 | Private recovery data | Encrypted private record |
 | Cloud resources | Re-creatable code, not irreplaceable state |
 
-## Restore exercise
+## Proof 001
 
-1. Back up a disposable test folder.
-2. Restore it to a new location.
-3. Compare contents.
-4. Recreate one low-risk Docker service.
-5. Reboot and verify the service returns.
-6. Record the result without exposing private details.
+Document one complete, sanitized walkthrough:
+
+1. Ubuntu Desktop boots and reconnects to Wi-Fi.
+2. SSH key login succeeds.
+3. One Docker service is reachable.
+4. The service survives a reboot.
+5. Disposable data is backed up.
+6. The data is restored to a new location.
+7. No private addresses, credentials, or identifiers are published.
 
 ## Completion gate
 
-- [ ] Ubuntu baseline passes.
+- [ ] Desktop baseline passes.
+- [ ] 48-hour stability test passes.
 - [ ] Independent backup and restore pass.
-- [ ] Docker lifecycle is documented.
+- [ ] Proof 001 is documented.
 - [ ] First VM lifecycle is documented.
 - [ ] Cloud budget alert and teardown are tested.
-- [ ] Build log is current.
 
-Only then unlock intentionally vulnerable security-lab targets.
+Only then unlock intentionally vulnerable security-lab targets or begin the Ubuntu Server migration.
