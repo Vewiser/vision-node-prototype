@@ -1,6 +1,15 @@
-# 04 // Ubuntu First Boot and SSH
+# 04 // Ubuntu Desktop First Boot and SSH
 
-## 1. Update the system
+## 1. Confirm the visual baseline
+
+- Open **Settings → System → About** and confirm the expected CPU, memory, and Ubuntu version.
+- Confirm Wi-Fi reconnects automatically.
+- Confirm the display uses a comfortable resolution and scaling.
+- Open Terminal with `Ctrl+Alt+T`.
+
+## 2. Update the system
+
+Use **App Center/Software Updater** for visibility, then confirm through Terminal:
 
 ```bash
 sudo apt update
@@ -8,49 +17,43 @@ sudo apt full-upgrade -y
 sudo reboot
 ```
 
-Log back in after reboot.
-
-## 2. Install the basic tools
+## 3. Install the basic tools
 
 ```bash
-sudo apt install -y curl git vim htop tmux tree unzip ufw smartmontools
+sudo apt install -y openssh-server curl git vim htop tmux tree unzip ufw smartmontools
+sudo systemctl enable --now ssh
 ```
 
-These provide downloads, version control, editing, monitoring, persistent terminal sessions, archive handling, a firewall, and drive-health tools.
+## 4. Create a stable local connection
 
-## 3. Give the node a stable address
-
-Keep Ubuntu on DHCP and create a DHCP reservation in the router using the wired adapter. This is simpler to recover than manually editing network configuration during Prototype 01.
-
-Confirm the address privately:
+Keep Ubuntu on DHCP and create a DHCP reservation in the router for the Wi-Fi adapter.
 
 ```bash
 hostname -I
 ip -br address
+nmcli device status
 ```
 
-## 4. Configure SSH keys
+Do not publish the real address or MAC address.
+
+## 5. Configure SSH keys
 
 On your Mac or trusted workstation:
 
 ```bash
 ssh-keygen -t ed25519 -a 100
-ssh-copy-id YOUR_USER@YOUR_PRIVATE_SERVER_IP
+ssh-copy-id YOUR_USER@YOUR_PRIVATE_NODE_IP
 ```
-
-If `ssh-copy-id` is unavailable, securely add the contents of your **public** `.pub` key to `~/.ssh/authorized_keys` on the server.
 
 Test in a second terminal before changing SSH settings:
 
 ```bash
-ssh YOUR_USER@YOUR_PRIVATE_SERVER_IP
+ssh YOUR_USER@YOUR_PRIVATE_NODE_IP
 ```
 
 Never copy or commit the private key.
 
-## 5. Enable the firewall
-
-First confirm SSH works locally, then:
+## 6. Enable the firewall
 
 ```bash
 sudo ufw default deny incoming
@@ -60,9 +63,9 @@ sudo ufw enable
 sudo ufw status verbose
 ```
 
-Keep your local console connected while testing so you can recover from a mistake. Do not forward port 22 through the router.
+Do not forward port 22 through the router.
 
-## 6. Inspect the baseline
+## 7. Inspect the baseline
 
 ```bash
 hostnamectl
@@ -76,4 +79,4 @@ sudo smartctl --scan
 
 ## Stop point
 
-Do not install Docker or dashboards until updates, SSH, firewall behavior, reboot, and a basic backup have all been validated.
+Do not install Docker, cloud CLIs, dashboards, or virtual machines until updates, SSH, firewall behavior, Wi-Fi reconnection, two reboots, and a basic backup have been validated.
