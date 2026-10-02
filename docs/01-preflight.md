@@ -1,6 +1,6 @@
 # 01 // Preflight and Recovery
 
-> Stop: installing Ubuntu Server on the selected 500 GB NVMe will erase Windows and its files.
+> Stop: installing Ubuntu Desktop on the selected 500 GB NVMe will erase Windows and its files.
 
 ## Preserve Windows
 
@@ -13,24 +13,30 @@
 ## Required equipment
 
 - [ ] M720q and power adapter
-- [ ] Keyboard and temporary display
+- [ ] Keyboard, mouse, and display
 - [ ] USB flash drive, 8 GB or larger
-- [ ] Temporary Ethernet cable for the easiest first installation
+- [ ] Temporary Ethernet cable for recovery if needed
 - [ ] Second computer for downloading and writing the installer
 - [ ] Independent backup destination
 - [ ] Router administration access
 
 ## Compatibility
 
-Ubuntu Server 26.04.1 LTS supports 64-bit Intel/AMD systems. The M720q's Intel Core i5-8400T, 16 GB RAM, and 500 GB NVMe exceed the installation baseline. Keep Intel virtualization enabled for the later KVM/libvirt lab.
+Ubuntu Desktop 26.04.1 LTS requires a 64-bit Intel/AMD processor, 6 GB RAM, and 25 GB free storage. The M720q's Intel Core i5-8400T, 16 GB RAM, and 500 GB NVMe exceed that baseline. Keep Intel virtualization enabled for the later KVM/libvirt lab.
 
-## Network plan
+## Try-before-install gate
 
-Use Ethernet and DHCP during installation when practical. After Ubuntu is stable, validate the internal Wi-Fi, test two Wi-Fi-only reboots, and create a router-side DHCP reservation. Never publish the real address, MAC address, SSID, or router configuration.
+Boot the USB into **Try Ubuntu** and confirm:
+
+- [ ] Display and keyboard work.
+- [ ] Internal Wi-Fi sees the intended network.
+- [ ] Bluetooth is detected if required.
+- [ ] The NVMe appears.
+- [ ] The desktop is responsive.
 
 ## Download safely
 
-1. Download the current Ubuntu Server 26.04.1 LTS AMD64 ISO from the official Ubuntu site.
+1. Download Ubuntu Desktop 26.04.1 LTS for Intel/AMD 64-bit systems from the official Ubuntu site.
 2. Read the current official installation guide.
 3. Verify the published SHA256 checksum.
 4. Write the ISO with a trusted imaging utility.
@@ -41,9 +47,9 @@ Use Ethernet and DHCP during installation when practical. After Ubuntu is stable
 - [ ] Windows backup verified
 - [ ] Recovery decision complete
 - [ ] Correct 500 GB NVMe identified
-- [ ] Official Ubuntu Server ISO obtained
+- [ ] Official Ubuntu Desktop ISO obtained
 - [ ] SHA256 checksum verified
-- [ ] Temporary network path available
+- [ ] Live-session hardware test passed
 - [ ] Router access available
 - [ ] Uninterrupted installation window available
 
