@@ -1,6 +1,6 @@
 # 05 // Ubuntu Desktop Starter Stack
 
-Install in stages. Use the visual desktop when it helps, but practice the command line so the later Ubuntu Server path feels familiar.
+Install in stages. Use the visual desktop when it helps, but practice the command line so Ubuntu Server and Amazon EC2 feel familiar.
 
 ## Phase 1 — Linux foundation
 
@@ -74,19 +74,20 @@ lscpu | grep Virtualization
 
 The first guest should be a low-risk Ubuntu test VM using libvirt's default NAT network. Start with 2 vCPU and 4 GB RAM. The vulnerable security lab remains locked until isolation is proven.
 
-## Phase 5 — Cloud engineering
+## Phase 5 — Amazon EC2 Linux Mastery
 
-Use a separate sandbox cloud account or project with MFA and a small budget alert. Practice:
+Use a separate AWS lab identity with MFA, budget alerts, and tagged disposable resources.
 
-- Launching and destroying one Ubuntu instance
-- SSH key authentication
-- Firewall/security-group rules
-- Terraform/OpenTofu state awareness
-- Simple CI/CD
-- Monitoring and logs
-- Cost review and teardown
+Complete the [Amazon EC2 Linux Mastery Lab](modules/aws-ec2-linux-lab/README.md):
 
-Cloud resources must be disposable and reproducible.
+- Launch and connect to Ubuntu Server
+- Learn files, users, permissions, packages, processes, services, storage, networking, and logs
+- Practice SSH and Systems Manager Session Manager
+- Add small, intentional CloudWatch monitoring
+- Rebuild with cloud-init, Ansible, or Terraform/OpenTofu
+- Compare Ubuntu Server with Amazon Linux 2023
+- Complete a controlled break-and-recover exercise
+- Terminate everything and document Proof 002
 
 ## Upgrade paths
 
@@ -102,6 +103,8 @@ At the end of Prototype 01, you should be able to explain:
 - How users, permissions, SSH, and firewall rules work
 - How Docker differs from the host
 - How a VM differs from a container
-- How a local node compares with a cloud instance
+- How local Linux compares with EC2 Linux
+- How Linux skills transfer between Ubuntu and Amazon Linux
 - Where data lives and how it is restored
+- How to prove that every cloud resource was removed
 - Why security-lab isolation matters
