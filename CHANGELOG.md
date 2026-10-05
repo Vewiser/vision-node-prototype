@@ -3,15 +3,34 @@
 ## [Unreleased]
 
 - Back up Windows and verify recovery
-- Confirm the exact internal Wi-Fi chipset
 - Install Ubuntu Desktop 26.04.1 LTS
 - Validate Wi-Fi, SSH, firewall, updates, and recovery
 - Complete the 48-hour stability test
 - Install Docker Engine and Compose
 - Document Proof 001
-- Launch and destroy the first disposable cloud instance
+- Complete the Amazon EC2 Linux Mastery Lab
+- Document Proof 002
 - Create one lightweight KVM/libvirt guest
 - Unlock the security lab only after isolation is proven
+
+## [0.8.0] - 2026-10-04
+
+### Added
+
+- Amazon EC2 Linux Mastery Lab
+- Secure EC2 launch and connection runbook
+- Nine-level Linux curriculum covering the shell, permissions, services, storage, networking, monitoring, automation, recovery, and distribution comparison
+- Ubuntu Server to Amazon Linux 2023 progression
+- AWS Systems Manager Session Manager milestone
+- Proof 002 EC2 Linux Operator standard
+- Detailed teardown and cost-review checklist
+
+### Changed
+
+- Added Amazon EC2 to the primary Vision Node architecture
+- Expanded the public repository security policy for AWS identities and resource identifiers
+- Converted the generic disposable cloud guide into a provider-neutral entry point
+- Required AWS budgets, tags, least privilege, synthetic data, and complete resource cleanup
 
 ## [0.7.0] - 2026-10-02
 
@@ -19,8 +38,6 @@
 
 - Made Ubuntu Desktop 26.04.1 LTS the Prototype 01 starting operating system
 - Preserved Ubuntu Server as a documented later upgrade path
-- Added a visual try-before-install and hardware validation stage
-- Simplified permanent Wi-Fi setup using Ubuntu Desktop and NetworkManager
 - Added the 48-hour stability gate and Proof 001
 - Preserved Docker, cloud engineering, KVM/libvirt, and the isolated ethical-security lab
 - Kept Proxmox as the later multi-VM upgrade path
@@ -30,7 +47,6 @@
 ### Changed
 
 - Replaced ZimaOS with Ubuntu Server 26.04.1 LTS
-- Reframed the M720q as a Linux, Docker, cloud-engineering, and ethical-security learning node
 - Replaced ZVM with KVM/libvirt
 - Removed active ZimaOS and ZVM pages
 
