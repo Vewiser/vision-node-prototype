@@ -1,20 +1,23 @@
 # Security Policy
 
-This is a public documentation repository for a private home lab.
+This is a public documentation repository for a private home lab and disposable cloud labs.
 
 ## Never publish
 
 - Passwords or password hashes
-- API keys, access tokens, cookies, or session data
+- API keys, access-key IDs, secret keys, tokens, cookies, or session data
 - Private SSH keys
 - Recovery codes or seed phrases
-- Public IP addresses
+- Public IP addresses or public DNS names
 - Exact private network topology or address assignments
 - MAC addresses, serial numbers, UUIDs, or product keys
+- AWS account, organization, instance, VPC, subnet, security-group, volume, snapshot, image, role, or resource IDs
+- Terraform state or unredacted infrastructure plans
 - Unredacted configuration exports
-- Router, firewall, VPN, or identity-provider backups
+- Router, firewall, VPN, cloud, or identity-provider backups
 - Personal email addresses, physical addresses, or location metadata
-- Screenshots containing notifications, bookmarks, reflections, or credentials
+- Billing details
+- Screenshots containing identities, notifications, bookmarks, reflections, credentials, or resource identifiers
 
 ## Configuration examples
 
@@ -23,6 +26,19 @@ All public examples must use reserved documentation values such as:
 - IPv4: `192.0.2.0/24`, `198.51.100.0/24`, or `203.0.113.0/24`
 - Domains: `example.com`, `example.net`, or `example.org`
 - Placeholder secrets: `REPLACE_ME`
+- Resource identifiers: `RESOURCE_ID_REDACTED`
+
+## Cloud-lab requirements
+
+- Root or owner identities use MFA and are not used for normal labs.
+- Use least-privilege lab roles or identities.
+- Restrict SSH to the operator's current IP; remove the rule when not needed.
+- Prefer managed session access after the SSH fundamentals lesson.
+- Use synthetic data only.
+- Tag disposable resources and set a planned deletion date.
+- Verify current prices before use.
+- Terminate compute and review storage, snapshots, addresses, monitoring, networking, and every region used.
+- Never use a public cloud lab as an exposed vulnerable target.
 
 ## If a secret is exposed
 
@@ -41,4 +57,4 @@ Security tools and experiments documented here are for systems owned by the oper
 
 ## Reporting
 
-Do not open a public issue containing a vulnerability, credential, real network information, or personally identifiable information.
+Do not open a public issue containing a vulnerability, credential, real network information, cloud identifier, billing information, or personally identifiable information.
