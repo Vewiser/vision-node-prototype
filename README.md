@@ -1,6 +1,6 @@
 # VISION NODE // PROTOTYPE 01
 
-> A compact Ubuntu-powered mini data center for learning Linux, cloud engineering, automation, and ethical security.
+> A compact Ubuntu-powered mini data center for learning Linux, cloud engineering, automation, ethical security, electronics, and radio systems.
 
 ![Status](https://img.shields.io/badge/status-build%20in%20progress-E10600)
 ![OS](https://img.shields.io/badge/OS-Ubuntu%20Desktop%2026.04.1%20LTS-E95420)
@@ -8,12 +8,13 @@
 ![Cloud](https://img.shields.io/badge/cloud-AWS%20EC2-FF9900)
 ![Method](https://img.shields.io/badge/method-AI%20Mastery%20Loop-E10600)
 ![Lab](https://img.shields.io/badge/lab-Cloud%20%2B%20Isolated%20Security-E10600)
+![Signal](https://img.shields.io/badge/signal-Electronics%20%2B%20RF-E10600)
 
 ## Mission
 
 Vision Node Prototype 01 turns a Lenovo ThinkCentre M720q into a practical first mini data center. Ubuntu Desktop provides a visual starting point without giving up the real Linux terminal. Docker runs useful services; Amazon EC2 provides disposable remote Linux practice; KVM/libvirt supports controlled virtual machines and an isolated ethical-security lab.
 
-AI supports the learning process as a coach, examiner, and review partner. It does not replace reading, first attempts, verification, recovery, or independent proof.
+AI supports the learning process as a coach, examiner, and review partner. It does not replace reading, first attempts, verification, recovery, independent proof, measurements, datasheets, licensing, or safe construction.
 
 ## Mastery method
 
@@ -63,10 +64,12 @@ flowchart TD
     M["AI Mastery Loop"] --> U["M720q • Ubuntu Desktop"]
     M --> A["AWS EC2 Linux Lab"]
     M --> V["KVM security lab"]
+    M --> R["VISION SIGNAL LAB • electronics + RF"]
     G["GitHub • source of truth"] --> M
     U --> D["Docker services"]
     A --> P["Proof 002 • Linux Operator"]
     M --> P3["Proof 003 • Systems Learner"]
+    R --> P4["Proof 004 • Electronics + RF Builder"]
 ```
 
 ## Beginner build sequence
@@ -85,6 +88,8 @@ flowchart TD
 - [ ] [Complete the Amazon EC2 Linux Mastery Lab](docs/modules/aws-ec2-linux-lab/README.md)
 - [ ] Document **Proof 002 // EC2 Linux Operator**
 - [ ] Document **Proof 003 // AI-Assisted Systems Learner**
+- [ ] [Complete VISION SIGNAL LAB](docs/modules/electronics-rf-mastery/README.md)
+- [ ] Document **Proof 004 // Electronics + RF Systems Builder**
 - [ ] [Document the build](docs/07-github-build-log.md)
 - [ ] [Unlock the isolated cyber lab](docs/modules/hacking-lab/README.md)
 
@@ -95,6 +100,7 @@ flowchart TD
 | Proof 001 | The local Ubuntu node is stable, recoverable, and understood |
 | Proof 002 | The operator can build, operate, recover, and remove Linux systems on EC2 |
 | Proof 003 | The operator can use AI to improve learning without becoming dependent on it |
+| Proof 004 | The operator can design, measure, troubleshoot, and safely explain electronics and RF systems |
 
 ## Operating model
 
@@ -110,6 +116,8 @@ flowchart TD
 - Run one unfamiliar command at a time and inspect the result.
 - Preserve human approval for deletion, billing, public exposure, security, and production changes.
 - Test only systems you own or are explicitly authorized to assess.
+- Begin electronics work with current-limited extra-low-voltage DC; do not build mains circuits in this module.
+- Receive first. Transmit only with the required license, privileges, station review, and RF-exposure evaluation.
 
 ## Current milestone
 
@@ -124,6 +132,7 @@ flowchart TD
 - [Ubuntu Server Upgrade Path](docs/future/ubuntu-server-upgrade-path.md)
 - [Proxmox Upgrade Path](docs/future/proxmox-upgrade-path.md)
 - [Cyber Lab](docs/modules/hacking-lab/README.md)
+- [VISION SIGNAL LAB](docs/modules/electronics-rf-mastery/README.md)
 
 ## Author
 

@@ -13,6 +13,20 @@
 - Document Proof 003
 - Create one lightweight KVM/libvirt guest
 - Unlock the security lab only after isolation is proven
+- Complete VISION SIGNAL LAB and document Proof 004
+
+## [0.10.0] - 2026-10-06
+
+### Added
+
+- VISION SIGNAL LAB module for electronics, circuit design, radio, and antenna theory
+- ARRL-led study stack with current Technician, Handbook, Antenna Book, Part 97, and RF-safety references
+- Nine-level mastery path, twelve Vision Node projects, Proof 004, and a VISION SIGNAL LAB 01 capstone
+- Receive-first progression with license, RF-exposure, dummy-load, power-line, lightning, and privacy gates
+
+### Changed
+
+- Expanded the mission, architecture, starter stack, proof system, build story, AI method, and security policy to include electronics and RF
 
 ## [0.9.0] - 2026-10-06
 

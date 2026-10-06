@@ -66,6 +66,18 @@ Deleting a file in a later commit does not remove it from Git history.
 
 Security tools and experiments documented here are for systems owned by the operator or systems for which explicit authorization has been granted. This project does not authorize testing third-party systems.
 
+## Electronics and RF boundaries
+
+- Start with current-limited extra-low-voltage DC; this repository provides no mains-voltage build path.
+- Disconnect power before changes; verify polarity, current limit, ratings, and meter mode before power-on.
+- Treat heat, smoke, odor, damaged insulation, and swelling batteries as stop conditions.
+- Default to receive-only work. Do not intercept, retain, publish, or act on private communications.
+- Transmit only with the required license, within current privileges and rules.
+- Use a rated dummy load when appropriate and protect receiver/test inputs from transmitter power.
+- Complete an RF-exposure evaluation before transmitting.
+- Keep antennas away from power lines; use qualified help for grounding and lightning protection.
+- Never interfere, impersonate, jam, disrupt, or access a system without authorization.
+
 ## Reporting
 
 Do not open a public issue containing a vulnerability, credential, real network information, cloud identifier, billing information, or personally identifiable information.
