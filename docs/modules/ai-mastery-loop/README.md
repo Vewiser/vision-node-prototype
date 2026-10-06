@@ -14,7 +14,7 @@ flowchart LR
 
 **READ → ASK AI → QUIZ → APPLY → REPEAT**
 
-This loop can be used with every Vision Node topic: Linux, Ubuntu, Docker, AWS EC2, networking, cloud engineering, automation, recovery, and ethical security.
+This loop can be used with every Vision Node topic: Linux, Ubuntu, Docker, AWS EC2, networking, cloud engineering, automation, recovery, ethical security, electronics, circuit design, radio, and antennas.
 
 ## What each stage means
 
