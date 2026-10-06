@@ -78,6 +78,18 @@ Complete the [Amazon EC2 Linux Mastery Lab](modules/aws-ec2-linux-lab/README.md)
 
 Apply the AI loop to one Linux, one cloud, and one networking/automation topic to complete Proof 003.
 
+## Phase 6 — Electronics and RF mastery
+
+Complete [VISION SIGNAL LAB](modules/electronics-rf-mastery/README.md):
+
+- Build protected extra-low-voltage circuits
+- Learn calculations, schematics, datasheets, simulation, measurement, and troubleshooting
+- Use receive-only SDR experiments to understand spectrum and noise
+- Study ARRL radio and antenna theory and current FCC rules
+- Model, build, and measure a receive antenna
+- Integrate a sensor or signal workflow with Ubuntu
+- Complete Proof 004
+
 ## Upgrade paths
 
 - [Ubuntu Server](future/ubuntu-server-upgrade-path.md) — lean headless operation after the Desktop build is reproducible
@@ -96,3 +108,6 @@ At the end of Prototype 01, you should be able to explain and demonstrate:
 - How data is backed up and restored
 - How to verify cloud-resource teardown
 - How to use AI without surrendering judgment or independent skill
+- How to design, measure, repair, and explain a low-voltage circuit
+- How radio signals, feed lines, propagation, and antennas work together
+- When transmitting requires a license and safety review

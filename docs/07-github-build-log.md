@@ -94,6 +94,8 @@ Do not publish:
 
 **End:** I could operate, rebuild, explain, and teach the system without depending on AI to do the work for me.
 
+**Signal Lab extension:** I moved from software into physical systems—calculating circuits, measuring real behavior, studying antennas, and making signals visible through the Vision Node.
+
 ## Release milestones
 
 - `v0.1` — Documentation foundation
@@ -106,3 +108,4 @@ Do not publish:
 - `v0.8` — Isolated ethical-security lab
 - `v0.9` — Ubuntu Server migration decision
 - `v1.0` — Repeatable Vision Node Prototype 01
+- `v1.1` — VISION SIGNAL LAB and Proof 004
